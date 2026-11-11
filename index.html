@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gribouillis de vie</title>
+<style>
+@font-face{font-family:'Playwrite FR Trad';font-weight:200;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-200-normal.woff2) format('woff2')}
+@font-face{font-family:'Playwrite FR Trad';font-weight:300;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-300-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:400;font-display:swap;src:url(fonts/quicksand-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:500;font-display:swap;src:url(fonts/quicksand-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:600;font-display:swap;src:url(fonts/quicksand-latin-600-normal.woff2) format('woff2')}
+  :root{--ink:#1c1c1c;--soft:#5e5a56;--line:#e9e4de;--rose:#e9988c;--beige:#cdb596}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#fff;color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;font-size:17px;line-height:1.7;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .hand{font-family:'Playwrite FR Trad',cursive;font-weight:300;letter-spacing:.2px;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(6px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.25rem;text-decoration:none;white-space:nowrap}
+  .links{display:flex;gap:28px;align-items:center;font-size:.92rem}
+  .links a{text-decoration:none;color:var(--soft)}
+  .links a:hover{color:var(--ink)}
+  .lang{display:flex;gap:2px;font-size:.8rem}
+  .lang button{border:0;background:none;cursor:pointer;font:500 .8rem 'Quicksand';color:#aaa;padding:4px 7px}
+  .lang button.on{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+  /* hero = une affiche */
+  .hero{padding:30px 0 40px;text-align:center}
+  .hero h1{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.9rem,4.4vw,3rem);line-height:2;margin-bottom:40px;text-wrap:balance}
+  .poster{display:grid;grid-template-columns:repeat(6,1fr);gap:18px 14px;align-items:end;max-width:900px;margin:0 auto}
+  .it{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .it img{height:78px;width:auto;object-fit:contain}
+  .it span{font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.62rem;color:#333;line-height:1.5}
+  .center{grid-column:2 / span 4;grid-row:2 / span 2;position:relative;display:flex;align-items:center;justify-content:center;min-height:300px}
+  .center .wash{position:absolute;inset:-30px -10px;background:url(img/wash-rose.png) center/contain no-repeat;opacity:.9}
+  .center div{position:relative;max-width:380px}
+  .center p.hand{font-size:clamp(1.15rem,2.4vw,1.5rem)}
+  .center p.sub{margin-top:10px;font-size:.98rem;color:#3d3a37}
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:46px}
+  .btn{display:inline-block;padding:12px 26px;border:1.3px solid var(--ink);border-radius:999px;text-decoration:none;font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:.95rem;transition:.2s}
+  .btn.full{background:var(--ink);color:#fff}
+  .btn:hover{transform:translateY(-2px)}
+
+  /* sections */
+  section{padding:70px 0}
+  .title{text-align:center;margin-bottom:46px;position:relative}
+  .title h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:2;position:relative}
+  .title p{color:var(--soft);max-width:34em;margin:10px auto 0;position:relative}
+  .title .wash{position:absolute;left:50%;top:-55px;width:360px;height:220px;transform:translateX(-50%);background-position:center;background-size:contain;background-repeat:no-repeat;opacity:.85}
+  .w-beige{background-image:url(img/wash-beige.png)}.w-rose{background-image:url(img/wash-rose.png)}
+  .w-vert{background-image:url(img/wash-vert.png)}.w-bleu{background-image:url(img/wash-bleu.png)}.w-jaune{background-image:url(img/wash-jaune.png)}
+
+  /* créations */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 28px}
+  .prod{text-align:center}
+  .prod .ph{aspect-ratio:375/480;overflow:hidden;border-radius:6px;background:#fff}
+  .prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .prod:hover .ph img{transform:scale(1.03)}
+  .prod .ph.art{display:flex;align-items:center;justify-content:center;position:relative}
+  .prod .ph.art .wash{position:absolute;inset:8%;background:center/contain no-repeat;opacity:.8}
+  .prod .ph.art img{position:relative;width:auto;height:46%;object-fit:contain}
+  .prod h3{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.12rem;margin:18px 0 8px;line-height:1.9}
+  .prod p{font-size:.93rem;color:var(--soft);max-width:26em;margin:0 auto}
+  .price{margin-top:8px;font-size:.9rem}
+  .price b{font-weight:600}
+.buy{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .buy a{padding:8px 16px;font-size:.82rem}
+  .soon{display:inline-block;margin-top:8px;font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.8rem;color:#b06f62}
+
+  /* galerie */
+  .gallery{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}
+  .gallery img{width:100%;height:100%;object-fit:cover;border-radius:6px;aspect-ratio:1}
+
+  /* étapes */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;text-align:center}
+  .step img{height:96px;width:auto;margin:0 auto 14px;object-fit:contain}
+  .step h3{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.1rem;margin-bottom:6px}
+  .step p{font-size:.94rem;color:var(--soft);max-width:22em;margin:0 auto}
+
+  /* qui suis-je */
+  .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .about .pic{position:relative;display:flex;align-items:center;justify-content:center;min-height:380px}
+  .about .pic .wash{position:absolute;inset:0;background:url(img/wash-beige.png) center/contain no-repeat}
+  .about .pic img{position:relative;width:min(58%,230px)}
+  .about h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.7rem,3.4vw,2.3rem);margin-bottom:14px;line-height:1.9}
+  .about .hello{font-family:'Playwrite FR Trad',cursive;font-weight:200;color:#b06f62;margin-bottom:18px;line-height:2}
+  .about p{color:#3d3a37;margin-bottom:14px}
+  .about .sign{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.5rem;margin-top:34px;line-height:2}
+  .chips{display:flex;flex-wrap:wrap;gap:14px 18px;margin:22px 0 6px;line-height:2;font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.82rem}
+  .chips span::before{content:'♡ ';color:var(--rose)}
+
+  /* faq */
+  .faq{max-width:740px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:18px 4px}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:'+';font-size:1.3rem;line-height:1;color:var(--rose)}
+  details[open] summary::after{content:'–'}
+  details p{color:var(--soft);margin-top:10px;font-size:.96rem}
+
+  /* fin */
+  .end{text-align:center;padding:60px 24px 70px;position:relative}
+  .end .deco{display:flex;justify-content:center;gap:30px;align-items:end;margin-bottom:26px}
+  .end .deco img{height:90px;width:auto}
+  .end h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:2}
+  .end p{color:var(--soft);margin:14px 0 28px}
+  footer{border-top:1px solid var(--line);padding:26px 0;font-size:.85rem;color:#8a857f}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+  footer .logo{font-size:1rem;color:var(--ink)}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media (max-width:860px){
+    .links a{display:none}
+    .poster{grid-template-columns:repeat(3,1fr);gap:16px 8px}
+    .center{grid-column:1 / -1;grid-row:auto;min-height:250px;order:-1;margin-bottom:10px}
+    .it img{height:62px}
+    .grid,.steps{grid-template-columns:1fr 1fr}
+    .about{grid-template-columns:1fr;gap:20px}
+    .about .pic{min-height:260px}
+    .gallery{grid-template-columns:1fr 1fr}.gallery img:first-child{grid-column:1 / -1}
+  }
+  @media (max-width:540px){
+    body{font-size:16px}
+    .grid,.steps{grid-template-columns:1fr}
+    .prod .ph{max-width:340px;margin:0 auto}
+    .poster .it:nth-child(n+11){display:none}
+    section{padding:60px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">gribouillis de vie</a>
+    <nav class="links">
+      <a href="#creations" data-fr="mes créations" data-en="my creations">mes créations</a>
+      <a href="#comment" data-fr="comment ça marche" data-en="how it works">comment ça marche</a>
+      <a href="#moi" data-fr="qui suis-je" data-en="about me">qui suis-je</a>
+      <a href="#faq" data-fr="questions" data-en="questions">questions</a>
+      <span class="lang"><button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button></span>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO façon affiche -->
+  <div class="hero wrap">
+    <h1 data-fr="pour garder les jolis moments de la vie" data-en="to keep life's sweetest moments">pour garder les jolis moments de la vie</h1>
+
+    <div class="poster">
+      <div class="it"><img src="img/i-soleil.png" alt=""><span data-fr="mon 1er sourire" data-en="my first smile">mon 1er sourire</span></div>
+      <div class="it"><img src="img/i-poussette.png" alt=""><span data-fr="ma 1ère balade" data-en="my first walk">ma 1ère balade</span></div>
+      <div class="it"><img src="img/i-coeurs-bocal.png" alt=""><span data-fr="ma lettre à ouvrir" data-en="my letter to open">ma lettre à ouvrir</span></div>
+      <div class="it"><img src="img/i-maman.png" alt=""><span data-fr="1 mois de grossesse" data-en="1 month pregnant">1 mois de grossesse</span></div>
+      <div class="it"><img src="img/i-abc.png" alt=""><span data-fr="mon 1er mot" data-en="my first word">mon 1er mot</span></div>
+      <div class="it"><img src="img/i-dent.png" alt=""><span data-fr="ma 1ère dent" data-en="my first tooth">ma 1ère dent</span></div>
+
+      <div class="it"><img src="img/i-poulpe.png" alt=""><span data-fr="mon 1er doudou" data-en="my first cuddly toy">mon 1er doudou</span></div>
+      <div class="center">
+        <div class="wash"></div>
+        <div>
+          <p class="hand" data-fr="affiches, cartes, lettres et livre à remplir, à offrir et à garder" data-en="posters, cards, letters and a book to fill in, give and keep">affiches, cartes, lettres et livre à remplir, à offrir et à garder</p>
+          <p class="sub" data-fr="La grossesse, la naissance, les premières fois, les mots qu'on veut transmettre… pour ne rien oublier, et le raconter un jour." data-en="Pregnancy, birth, first times, the words you want to pass on… so you never forget, and can tell the story one day.">La grossesse, la naissance, les premières fois, les mots qu'on veut transmettre… pour ne rien oublier, et le raconter un jour.</p>
+        </div>
+      </div>
+      <div class="it"><img src="img/i-bain.png" alt=""><span data-fr="mon 1er bain" data-en="my first bath">mon 1er bain</span></div>
+      <div class="it"><img src="img/i-lune.png" alt=""><span data-fr="ma 1ère nuit" data-en="my first night">ma 1ère nuit</span></div>
+      <div class="it"><img src="img/i-ballons.png" alt=""><span data-fr="mon 1er anniversaire" data-en="my first birthday">mon 1er anniversaire</span></div>
+    </div>
+
+    <div class="btns">
+      <a class="btn full" href="https://www.etsy.com/shop/lembrancasdevida" target="_blank" rel="noopener" data-fr="voir la boutique Etsy" data-en="visit the Etsy shop">voir la boutique Etsy</a>
+      <a class="btn" href="#creations" data-fr="découvrir mes créations" data-en="see my creations">découvrir mes créations</a>
+    </div>
+  </div>
+
+  <!-- CRÉATIONS -->
+  <section id="creations">
+    <div class="wrap">
+      <div class="title reveal">
+        <div class="wash w-beige"></div>
+        <h2 data-fr="mes créations" data-en="my creations">mes créations</h2>
+        <p data-fr="Chaque design est imaginé et créé par moi, puis imprimé avec soin. En français ou en anglais." data-en="Every design is imagined and created by me, then carefully printed. In French or in English.">Chaque design est imaginé et créé par moi, puis imprimé avec soin. En français ou en anglais.</p>
+        <p class="soon" style="position:relative;display:block;margin-top:10px" data-fr="les commandes se font pour l'instant sur Etsy · bientôt directement ici" data-en="orders currently go through Etsy · soon directly here">les commandes se font pour l'instant sur Etsy · bientôt directement ici</p>
+      </div>
+
+      <div class="grid">
+        <div class="prod reveal">
+          <div class="ph"><img src="img/box-premieres-fois.jpg" alt="Affiche premières fois personnalisée"></div>
+          <h3 data-fr="les premières fois" data-en="first times">les premières fois</h3>
+          <p data-fr="Avec le prénom de l'enfant. Vous notez la date de chaque première fois." data-en="With the child's name. You write down the date of each first time.">Avec le prénom de l'enfant. Vous notez la date de chaque première fois.</p>
+          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
+          <div class="buy" data-product="premieres-fois"></div>
+        </div>
+        <div class="prod reveal">
+          <div class="ph"><img src="img/box-betises.jpg" alt="Affiche premières petites bêtises"></div>
+          <h3 data-fr="les premières petites bêtises" data-en="first little mischiefs">les premières petites bêtises</h3>
+          <p data-fr="Lancer la purée, dessiner sur les murs… pour en rire plus tard." data-en="Throwing mashed potatoes, drawing on the walls… to laugh about later.">Lancer la purée, dessiner sur les murs… pour en rire plus tard.</p>
+          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
+          <div class="buy" data-product="betises"></div>
+        </div>
+        <div class="prod reveal">
+          <div class="ph"><img src="img/box-grossesse.jpg" alt="Affiche ma grossesse"></div>
+          <h3 data-fr="ma grossesse" data-en="my pregnancy">ma grossesse</h3>
+          <p data-fr="Du test positif à l'arrivée à la maternité, toutes les étapes à noter." data-en="From the positive test to the maternity ward, every step to write down.">Du test positif à l'arrivée à la maternité, toutes les étapes à noter.</p>
+          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
+          <div class="buy" data-product="grossesse"></div>
+        </div>
+        <div class="prod reveal">
+          <div class="ph"><img src="img/carte-grossesse.jpg" alt="Carte étape grossesse" style="object-fit:contain"></div>
+          <h3 data-fr="les cartes étapes" data-en="milestone cards">les cartes étapes</h3>
+          <p data-fr="« 1 mois de grossesse », « mon premier sourire »… à poser à côté du bébé pour la photo. Au dos : la date et quelques mots." data-en="“1 month pregnant”, “my first smile”… to place next to baby for the photo. On the back: the date and a few words.">« 1 mois de grossesse », « mon premier sourire »… à poser à côté du bébé pour la photo. Au dos : la date et quelques mots.</p>
+          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
+        </div>
+        <div class="prod reveal">
+          <div class="ph art"><div class="wash w-rose"></div><img src="img/i-coeurs-bocal.png" alt=""></div>
+          <h3 data-fr="les lettres à offrir" data-en="letters to give">les lettres à offrir</h3>
+          <p data-fr="Des lettres à écrire à son enfant, avec enveloppes et étiquettes « à ouvrir le jour… »." data-en="Letters to write to your child, with envelopes and “to open on the day…” labels.">Des lettres à écrire à son enfant, avec enveloppes et étiquettes « à ouvrir le jour… ».</p>
+          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
+        </div>
+        <div class="prod reveal">
+          <div class="ph art"><div class="wash w-vert"></div><img src="img/i-mains.png" alt=""></div>
+          <h3 data-fr="le livre « mes premières fois »" data-en="the “my first times” book">le livre « mes premières fois »</h3>
+          <p data-fr="De l'annonce de la grossesse jusqu'au CM2 : pour écrire les anecdotes et coller les photos." data-en="From the pregnancy announcement to the end of primary school: to write the stories and stick the photos.">De l'annonce de la grossesse jusqu'au CM2 : pour écrire les anecdotes et coller les photos.</p>
+          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section style="padding-top:10px">
+    <div class="wrap">
+      <div class="title reveal">
+        <div class="wash w-rose" style="opacity:.55"></div>
+        <h2 data-fr="chez vous" data-en="in your home">chez vous</h2>
+      </div>
+      <div class="gallery reveal">
+        <img src="img/mockup-3cadres.jpg" alt="Trois affiches dans une chambre d'enfant">
+        <img src="img/mockup-etagere.jpg" alt="Affiche encadrée sur une étagère">
+        <img src="img/box-irina.jpg" alt="Affiche dans son colis">
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section id="comment">
+    <div class="wrap">
+      <div class="title reveal">
+        <div class="wash w-jaune" style="opacity:.6"></div>
+        <h2 data-fr="comment ça marche" data-en="how it works">comment ça marche</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><img src="img/i-abc.png" alt=""><h3 data-fr="1. je choisis" data-en="1. choose">1. je choisis</h3><p data-fr="La création, la langue (français ou anglais), en PDF ou en papier." data-en="The design, the language (French or English), PDF or paper.">La création, la langue (français ou anglais), en PDF ou en papier.</p></div>
+        <div class="step reveal"><img src="img/i-coeurs-bocal.png" alt=""><h3 data-fr="2. je personnalise" data-en="2. personalise">2. je personnalise</h3><p data-fr="J'indique le prénom de l'enfant au moment de la commande sur Etsy." data-en="Add the child's name when ordering on Etsy.">J'indique le prénom de l'enfant au moment de la commande sur Etsy.</p></div>
+        <div class="step reveal"><img src="img/i-poussette.png" alt=""><h3 data-fr="3. je reçois" data-en="3. receive">3. je reçois</h3><p data-fr="Le PDF à imprimer chez soi, ou la version papier livrée gratuitement en France." data-en="The PDF to print at home, or the paper version delivered free in France.">Le PDF à imprimer chez soi, ou la version papier livrée gratuitement en France.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUI SUIS-JE -->
+  <section id="moi">
+    <div class="wrap about">
+      <div class="pic reveal"><div class="wash"></div><img src="img/i-mains.png" alt=""></div>
+      <div class="reveal">
+        <h2 data-fr="qui suis-je ?" data-en="who am I?">qui suis-je ?</h2>
+        <p class="hello" data-fr="bonjour, moi c'est Stéphanie" data-en="hello, I'm Stéphanie">bonjour, moi c'est Stéphanie</p>
+        <p data-fr="Maman de trois enfants, j'ai toujours aimé garder une trace des moments qui comptent. Mais à chaque naissance, je cherchais en vain des créations douces et élégantes, qui me ressemblent." data-en="As a mum of three, I've always loved keeping a trace of the moments that matter. But with every birth, I searched in vain for soft, elegant designs that felt like me.">Maman de trois enfants, j'ai toujours aimé garder une trace des moments qui comptent. Mais à chaque naissance, je cherchais en vain des créations douces et élégantes, qui me ressemblent.</p>
+        <p data-fr="J'ai aussi remarqué que tout, ou presque, était pensé pour les bébés. Les plus grands, les mamans, les papas, les grands-parents étaient souvent oubliés. Pourtant, ils ont toute leur place dans l'histoire d'un enfant, et son arrivée change aussi leur vie." data-en="I also noticed that almost everything was made for babies. Older children, mums, dads and grandparents were often forgotten. Yet they all have their place in a child's story, and a new arrival changes their lives too.">J'ai aussi remarqué que tout, ou presque, était pensé pour les bébés. Les plus grands, les mamans, les papas, les grands-parents étaient souvent oubliés. Pourtant, ils ont toute leur place dans l'histoire d'un enfant, et son arrivée change aussi leur vie.</p>
+        <p data-fr="C'est de là qu'est né Gribouillis de vie : des affiches, des cartes et des lettres pensées pour toute la famille, et un livre qui accompagne toute l'enfance, de l'annonce de la grossesse jusqu'à la fin du CM2. Un livre que je n'ai jamais trouvé ailleurs." data-en="That's how Gribouillis de vie was born: posters, cards and letters designed for the whole family, and a book that follows all of childhood, from the pregnancy announcement to the end of primary school. A book I never found anywhere else.">C'est de là qu'est né Gribouillis de vie : des affiches, des cartes et des lettres pensées pour toute la famille, et un livre qui accompagne toute l'enfance, de l'annonce de la grossesse jusqu'à la fin du CM2. Un livre que je n'ai jamais trouvé ailleurs.</p>
+        <p data-fr="Chaque création est imaginée avec soin, pour que vos souvenirs soient beaux à regarder aujourd'hui, et précieux à relire demain." data-en="Every design is created with care, so your memories are lovely to look at today, and precious to read again tomorrow.">Chaque création est imaginée avec soin, pour que vos souvenirs soient beaux à regarder aujourd'hui, et précieux à relire demain.</p>
+        <p data-fr="Le nom ? Un clin d'œil à <b>Gribouille</b>, l'un de mes chats, et à mon écriture, qui ressemble un peu à des gribouillis." data-en="The name? A nod to <b>Gribouille</b>, one of my cats, and to my handwriting, which looks a bit like scribbles (“gribouillis” in French).">Le nom ? Un clin d'œil à <b>Gribouille</b>, l'un de mes chats, et à mon écriture, qui ressemble un peu à des gribouillis.</p>
+        <div class="chips">
+          <span data-fr="designs originaux" data-en="original designs">designs originaux</span>
+          <span data-fr="petite boutique française" data-en="small French shop">petite boutique française</span>
+          <span data-fr="pour toute la famille" data-en="for the whole family">pour toute la famille</span>
+          <span data-fr="français ou anglais" data-en="French or English">français ou anglais</span>
+        </div>
+        <p class="sign">Stéphanie</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="title reveal">
+        <div class="wash w-bleu" style="opacity:.55"></div>
+        <h2 data-fr="vos questions" data-en="your questions">vos questions</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary data-fr="Quelle est la différence entre le PDF et l'affiche papier ?" data-en="What's the difference between the PDF and the paper poster?">Quelle est la différence entre le PDF et l'affiche papier ?</summary><p data-fr="Le PDF (10 €) est un fichier que vous imprimez vous-même, chez vous ou chez un imprimeur. L'affiche papier (24 €) est imprimée par mes soins et vous est envoyée, livraison offerte en France." data-en="The PDF (€10) is a file you print yourself, at home or at a print shop. The paper poster (€24) is printed by me and sent to you, free delivery in France.">Le PDF (10 €) est un fichier que vous imprimez vous-même, chez vous ou chez un imprimeur. L'affiche papier (24 €) est imprimée par mes soins et vous est envoyée, livraison offerte en France.</p></details>
+        <details><summary data-fr="Existe-t-il une version en anglais ?" data-en="Is there an English version?">Existe-t-il une version en anglais ?</summary><p data-fr="Oui. Chaque création existe en français et en anglais : vous recevez uniquement la langue choisie." data-en="Yes. Every design exists in French and in English: you only receive the language you choose.">Oui. Chaque création existe en français et en anglais : vous recevez uniquement la langue choisie.</p></details>
+        <details><summary data-fr="C'est adapté pour une fille et pour un garçon ?" data-en="Is it suitable for a girl and a boy?">C'est adapté pour une fille et pour un garçon ?</summary><p data-fr="Oui, les designs conviennent à tous les enfants et se personnalisent avec le prénom." data-en="Yes, the designs suit every child and are personalised with the name.">Oui, les designs conviennent à tous les enfants et se personnalisent avec le prénom.</p></details>
+        <details><summary data-fr="Comment commander ?" data-en="How do I order?">Comment commander ?</summary><p data-fr="Toutes les commandes se font sur ma boutique Etsy, en toute sécurité. Vous choisissez le format et la langue, puis vous indiquez le prénom." data-en="All orders go through my Etsy shop, safely. Choose the format and the language, then add the name.">Toutes les commandes se font sur ma boutique Etsy, en toute sécurité. Vous choisissez le format et la langue, puis vous indiquez le prénom.</p></details>
+        <details><summary data-fr="C'est une bonne idée de cadeau de naissance ?" data-en="Is it a good birth gift?">C'est une bonne idée de cadeau de naissance ?</summary><p data-fr="C'est même l'idée de départ : un cadeau original, utile pendant des années, qui devient un vrai souvenir de famille." data-en="That's the whole idea: an original gift, useful for years, that becomes a real family keepsake.">C'est même l'idée de départ : un cadeau original, utile pendant des années, qui devient un vrai souvenir de famille.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIN -->
+  <div class="end wrap reveal">
+    <div class="deco"><img src="img/i-ballons-coeurs.png" alt=""><img src="img/i-maman.png" alt=""><img src="img/i-ballons.png" alt=""></div>
+    <h2 data-fr="gardez une trace des jolis moments" data-en="keep a trace of the sweetest moments">gardez une trace des jolis moments</h2>
+    <p data-fr="Toutes mes créations sont sur Etsy." data-en="All my creations are on Etsy.">Toutes mes créations sont sur Etsy.</p>
+    <a class="btn full" href="https://www.etsy.com/shop/lembrancasdevida" target="_blank" rel="noopener" data-fr="aller sur la boutique" data-en="go to the shop">aller sur la boutique</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">gribouillis de vie</span>
+    <span data-fr="Créations originales · France" data-en="Original designs · France">Créations originales · France</span>
+  </div>
+</footer>
+
+<script>
+
+  // ===== Paiements =====
+  // Quand le compte Stripe sera prêt : coller ici les liens de paiement de chaque produit.
+  // Tant qu'un lien est vide, le bouton renvoie vers la boutique Etsy.
+  const ETSY='https://www.etsy.com/shop/lembrancasdevida';
+  const STRIPE={
+    'premieres-fois':{papier:'',pdf:''},
+    'betises':{papier:'',pdf:''},
+    'grossesse':{papier:'',pdf:''}
+  };
+  function renderBuy(){
+    const en=document.documentElement.lang==='en';
+    document.querySelectorAll('.buy').forEach(el=>{
+      const l=STRIPE[el.dataset.product]||{};
+      const btn=(href,txt,full)=>`<a class="btn${full?' full':''}" href="${href}" target="_blank" rel="noopener">${txt}</a>`;
+      if(l.papier||l.pdf){
+        el.innerHTML=(l.papier?btn(l.papier,en?'buy · paper €24':'acheter · papier 24 €',true):'')+(l.pdf?btn(l.pdf,en?'buy · PDF €10':'acheter · PDF 10 €',false):'');
+      }else{
+        el.innerHTML=btn(ETSY,en?'see on Etsy':'voir sur Etsy',false);
+      }
+    });
+  }
+  renderBuy();
+  function setLang(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-fr]').forEach(el=>{const t=el.getAttribute('data-'+l); if(t!==null) el.innerHTML=t;});
+    document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+    try{localStorage.setItem('gdv-lang',l)}catch(e){}
+    renderBuy();
+  }
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  try{if(localStorage.getItem('gdv-lang')==='en') setLang('en')}catch(e){}
+  const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}):null;
+  document.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('in'));
+</script>
+</body>
+</html>
