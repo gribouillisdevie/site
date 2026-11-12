@@ -65,7 +65,8 @@
   .prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
   .prod:hover .ph img{transform:scale(1.03)}
   .prod .ph.art{display:flex;align-items:center;justify-content:center;position:relative}
-  .prod .ph.art .wash{position:absolute;inset:8%;background:center/contain no-repeat;opacity:.8}
+  .prod .ph.art .wash{position:absolute;inset:8%;background-position:center;background-size:contain;background-repeat:no-repeat;opacity:.8}
+  #catalog .ph.art{aspect-ratio:1}
   .prod .ph.art img{position:relative;width:auto;height:46%;object-fit:contain}
   .prod h3{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.12rem;margin:18px 0 8px;line-height:1.9}
   .prod p{font-size:.93rem;color:var(--soft);max-width:26em;margin:0 auto}
@@ -75,6 +76,17 @@
   .buy a{padding:8px 16px;font-size:.82rem}
   .soon{display:inline-block;margin-top:8px;font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.8rem;color:#b06f62}
 
+
+  /* catalogue */
+  .cats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:-10px 0 14px}
+  .cats button,.subs button{border:1.2px solid var(--line);background:#fff;border-radius:999px;cursor:pointer;font:500 .88rem 'Quicksand';color:var(--soft);padding:8px 18px;transition:.2s}
+  .cats button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .subs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px;min-height:36px}
+  .subs button{font-size:.8rem;padding:6px 14px}
+  .subs button.on{border-color:var(--ink);color:var(--ink)}
+  .prod .tag{font-size:.75rem;color:#b06f62;letter-spacing:.3px;margin-top:14px}
+  .prod .tag+h3{margin-top:4px}
+  .formats{font-size:.82rem;color:var(--soft);margin-top:6px}
   /* galerie */
   .gallery{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}
   .gallery img{width:100%;height:100%;object-fit:cover;border-radius:6px;aspect-ratio:1}
@@ -198,47 +210,9 @@
         <p class="soon" style="position:relative;display:block;margin-top:10px" data-fr="les commandes se font pour l'instant sur Etsy · bientôt directement ici" data-en="orders currently go through Etsy · soon directly here">les commandes se font pour l'instant sur Etsy · bientôt directement ici</p>
       </div>
 
-      <div class="grid">
-        <div class="prod reveal">
-          <div class="ph"><img src="img/box-premieres-fois.jpg" alt="Affiche premières fois personnalisée"></div>
-          <h3 data-fr="les premières fois" data-en="first times">les premières fois</h3>
-          <p data-fr="Avec le prénom de l'enfant. Vous notez la date de chaque première fois." data-en="With the child's name. You write down the date of each first time.">Avec le prénom de l'enfant. Vous notez la date de chaque première fois.</p>
-          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
-          <div class="buy" data-product="premieres-fois"></div>
-        </div>
-        <div class="prod reveal">
-          <div class="ph"><img src="img/box-betises.jpg" alt="Affiche premières petites bêtises"></div>
-          <h3 data-fr="les premières petites bêtises" data-en="first little mischiefs">les premières petites bêtises</h3>
-          <p data-fr="Lancer la purée, dessiner sur les murs… pour en rire plus tard." data-en="Throwing mashed potatoes, drawing on the walls… to laugh about later.">Lancer la purée, dessiner sur les murs… pour en rire plus tard.</p>
-          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
-          <div class="buy" data-product="betises"></div>
-        </div>
-        <div class="prod reveal">
-          <div class="ph"><img src="img/box-grossesse.jpg" alt="Affiche ma grossesse"></div>
-          <h3 data-fr="ma grossesse" data-en="my pregnancy">ma grossesse</h3>
-          <p data-fr="Du test positif à l'arrivée à la maternité, toutes les étapes à noter." data-en="From the positive test to the maternity ward, every step to write down.">Du test positif à l'arrivée à la maternité, toutes les étapes à noter.</p>
-          <div class="price" data-fr="<b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF" data-en="<b>€24</b> paper, free delivery in France · <b>€10</b> PDF"><b>24 €</b> papier, livraison offerte · <b>10 €</b> PDF</div>
-          <div class="buy" data-product="grossesse"></div>
-        </div>
-        <div class="prod reveal">
-          <div class="ph"><img src="img/carte-grossesse.jpg" alt="Carte étape grossesse" style="object-fit:contain"></div>
-          <h3 data-fr="les cartes étapes" data-en="milestone cards">les cartes étapes</h3>
-          <p data-fr="« 1 mois de grossesse », « mon premier sourire »… à poser à côté du bébé pour la photo. Au dos : la date et quelques mots." data-en="“1 month pregnant”, “my first smile”… to place next to baby for the photo. On the back: the date and a few words.">« 1 mois de grossesse », « mon premier sourire »… à poser à côté du bébé pour la photo. Au dos : la date et quelques mots.</p>
-          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
-        </div>
-        <div class="prod reveal">
-          <div class="ph art"><div class="wash w-rose"></div><img src="img/i-coeurs-bocal.png" alt=""></div>
-          <h3 data-fr="les lettres à offrir" data-en="letters to give">les lettres à offrir</h3>
-          <p data-fr="Des lettres à écrire à son enfant, avec enveloppes et étiquettes « à ouvrir le jour… »." data-en="Letters to write to your child, with envelopes and “to open on the day…” labels.">Des lettres à écrire à son enfant, avec enveloppes et étiquettes « à ouvrir le jour… ».</p>
-          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
-        </div>
-        <div class="prod reveal">
-          <div class="ph art"><div class="wash w-vert"></div><img src="img/i-mains.png" alt=""></div>
-          <h3 data-fr="le livre « mes premières fois »" data-en="the “my first times” book">le livre « mes premières fois »</h3>
-          <p data-fr="De l'annonce de la grossesse jusqu'au CM2 : pour écrire les anecdotes et coller les photos." data-en="From the pregnancy announcement to the end of primary school: to write the stories and stick the photos.">De l'annonce de la grossesse jusqu'au CM2 : pour écrire les anecdotes et coller les photos.</p>
-          <span class="soon" data-fr="bientôt" data-en="coming soon">bientôt</span>
-        </div>
-      </div>
+      <div class="cats" id="cats"></div>
+      <div class="subs" id="subs"></div>
+      <div class="grid" id="catalog"></div>
     </div>
   </section>
 
@@ -331,34 +305,65 @@
 
 <script>
 
-  // ===== Paiements =====
-  // Quand le compte Stripe sera prêt : coller ici les liens de paiement de chaque produit.
-  // Tant qu'un lien est vide, le bouton renvoie vers la boutique Etsy.
-  const ETSY='https://www.etsy.com/shop/LesGribouillisDeVie';
-  const STRIPE={
-    'premieres-fois':{papier:'',pdf:''},
-    'betises':{papier:'',pdf:''},
-    'grossesse':{papier:'',pdf:''}
-  };
-  function renderBuy(){
-    const en=document.documentElement.lang==='en';
-    document.querySelectorAll('.buy').forEach(el=>{
-      const l=STRIPE[el.dataset.product]||{};
-      const btn=(href,txt,full)=>`<a class="btn${full?' full':''}" href="${href}" target="_blank" rel="noopener">${txt}</a>`;
-      if(l.papier||l.pdf){
-        el.innerHTML=(l.papier?btn(l.papier,en?'buy · paper €24':'acheter · papier 24 €',true):'')+(l.pdf?btn(l.pdf,en?'buy · PDF €10':'acheter · PDF 10 €',false):'');
-      }else{
-        el.innerHTML=btn(ETSY,en?'see on Etsy':'voir sur Etsy',false);
-      }
-    });
+  // ===== Catalogue (mêmes produits que la boutique Etsy) =====
+  const L=id=>'https://www.etsy.com/listing/'+id;
+  const CATS=[
+    {id:'all',fr:'tout voir',en:'see all'},
+    {id:'pf',fr:'affiches premières fois',en:'first times posters',subs:[
+      {id:'bebe',fr:'bébé',en:'baby'},{id:'famille',fr:'famille',en:'family'},{id:'animaux',fr:'animaux',en:'pets'}]},
+    {id:'dater',fr:'affiches à dater',en:'posters to date',subs:[
+      {id:'grossesse',fr:'grossesse',en:'pregnancy'},{id:'enfance',fr:'enfance',en:'childhood'}]},
+    {id:'voyage',fr:'affiches voyage',en:'travel posters'},
+    {id:'lettres',fr:'lettres à écrire',en:'letters to write',subs:[
+      {id:'collections',fr:'les collections',en:'the collections'},{id:'coffret',fr:'le coffret',en:'the gift box'}]}
+  ];
+  const P=[
+    {cat:'pf',sub:'bebe',ic:'i-soleil',w:'rose',fr:'les premières fois de bébé',en:"baby's first times",dfr:"Avec le prénom de l'enfant. Vous notez la date de chaque première fois.",den:"With the child's name. Write down the date of each first time.",papier:4572582204,pdf:4403564080},
+    {cat:'pf',sub:'bebe',ic:'i-coeurs-bocal',w:'beige',fr:'les premières fois de bébé · version chrétienne',en:"baby's first times · Christian version",dfr:'Avec le baptême et les grandes fêtes chrétiennes.',den:'With the baptism and the main Christian holidays.',papier:1811950988,pdf:4604538396},
+    {cat:'pf',sub:'bebe',ic:'i-lune',w:'bleu',fr:'les premières fois de bébé · version juive',en:"baby's first times · Jewish version",dfr:'Avec les grandes fêtes juives.',den:'With the main Jewish holidays.',papier:4403812540,pdf:4604518173},
+    {cat:'pf',sub:'bebe',ic:'i-lune',w:'vert',fr:'les premières fois de bébé · version musulmane',en:"baby's first times · Muslim version",dfr:'Avec les grandes fêtes musulmanes.',den:'With the main Muslim holidays.',papier:1811925226,pdf:4604539174},
+    {cat:'pf',sub:'famille',ic:'i-abc',w:'jaune',fr:'les premières fois de grand frère / grande sœur',en:'big brother / big sister first times',dfr:"Pour l'aîné, qui vit lui aussi une grande aventure.",den:'For the older child, who is on a big adventure too.',papier:4403562900,pdf:4604519475},
+    {cat:'pf',sub:'famille',ic:'i-maman',w:'rose',fr:'les premières fois de maman',en:"mum's first times",dfr:'Toutes les premières fois vécues en devenant maman.',den:'All the first times of becoming a mum.',papier:1811922712,pdf:4604515035},
+    {cat:'pf',sub:'famille',ic:'i-ballons',w:'bleu',fr:'les premières fois de super papa',en:"super dad's first times",dfr:'Toutes les premières fois vécues en devenant papa.',den:'All the first times of becoming a dad.',papier:4403566828,pdf:4604519191},
+    {cat:'pf',sub:'famille',ic:'i-mains',w:'beige',fr:'les premières fois de mamie et papi',en:"grandma and grandpa's first times",dfr:'Pour les grands-parents, qui ont toute leur place dans l’histoire.',den:'For grandparents, who have their place in the story too.',papier:1811921450,pdf:4604517973},
+    {cat:'pf',sub:'animaux',ic:'i-poulpe',w:'jaune',fr:'les premières fois de mon chien ou de mon chat',en:"my dog's or cat's first times",dfr:'Pour garder les souvenirs de votre compagnon à quatre pattes.',den:'To keep the memories of your four-legged friend.',papier:1826111585,pdf:4604517473},
+    {cat:'dater',sub:'grossesse',ic:'i-test',w:'rose',fr:'ma grossesse',en:'my pregnancy',dfr:"Du test positif à l'arrivée à la maternité, toutes les étapes à noter.",den:'From the positive test to the maternity ward, every step to write down.',papier:4403618773,pdf:4604518957},
+    {cat:'dater',sub:'enfance',ic:'i-bain',w:'bleu',fr:'les premières petites bêtises',en:'first little mischiefs',dfr:'Lancer la purée, dessiner sur les murs… pour en rire plus tard.',den:'Throwing mashed potatoes, drawing on the walls… to laugh about later.',papier:4403567769,pdf:4604520009},
+    {cat:'dater',sub:'enfance',ic:'i-biberon',w:'vert',fr:'les premiers fruits et légumes',en:'first fruits and vegetables',dfr:'Pour noter chaque nouvel aliment goûté pendant la diversification.',den:'To note each new food tasted while starting solids.',papier:4403561166,pdf:4604541918},
+    {cat:'voyage',ic:'i-ballons-coeurs',w:'bleu',fr:'city trip ou world trip',en:'city trip or world trip',dfr:'Cochez et datez chaque ville ou chaque pays visité.',den:'Tick and date each city or country you visit.',papier:1826131923,pdf:4604539864},
+    {cat:'lettres',sub:'collections',ic:'i-coeurs-bocal',w:'rose',fr:"lettres aux personnes que j'aime",en:'letters to the people I love',dfr:'Des lettres à écrire et à glisser dans leurs enveloppes.',den:'Letters to write and slip into their envelopes.',papier:4608144376,pdf:4608119591,en_:4608156013},
+    {cat:'lettres',sub:'collections',ic:'i-soleil',w:'jaune',fr:'lettres de réconfort',en:'comfort letters',dfr:'Des mots doux à ouvrir dans les moments difficiles.',den:'Kind words to open in difficult moments.',papier:4608146182,pdf:4608142844,en_:4608175054},
+    {cat:'lettres',sub:'collections',ic:'i-ballons-coeurs',w:'rose',fr:'lettres de couple',en:'letters for couples',dfr:'Des lettres à écrire à la personne qu’on aime.',den:'Letters to write to the one you love.',papier:4608125849,pdf:4608122075,en_:4608154361},
+    {cat:'lettres',sub:'collections',ic:'i-mains',w:'beige',fr:'lettres à mon enfant pour plus tard',en:'letters to my child for later',dfr:'À ouvrir le jour de ses 18 ans, de son premier amour…',den:'To open on their 18th birthday, their first love…',papier:4608125207,pdf:4608140982,en_:4608153381},
+    {cat:'lettres',sub:'collections',ic:'i-poussette',w:'vert',fr:"lettres souvenirs d'enfance",en:'childhood memories letters',dfr:"Pour raconter à son enfant ses premières années.",den:'To tell your child about their first years.',papier:4608145578,pdf:4608121561,en_:4608153871},
+    {cat:'lettres',sub:'coffret',ic:'i-coeurs-bocal',w:'beige',fr:'le coffret des 5 collections',en:'the 5 collections gift box',dfr:'Les 41 lettres des 5 collections, avec leurs enveloppes.',den:'All 41 letters from the 5 collections, with their envelopes.',papier:4608146536,pdf:4608123621,en_:4608175678}
+  ];
+  let curCat='all',curSub=null;
+  function renderCatalog(){
+    const en=document.documentElement.lang==='en', t=o=>en?o.en:o.fr;
+    document.getElementById('cats').innerHTML=CATS.map(c=>`<button data-c="${c.id}" class="${c.id===curCat?'on':''}">${t(c)}</button>`).join('');
+    const cat=CATS.find(c=>c.id===curCat);
+    document.getElementById('subs').innerHTML=cat.subs?[{id:null,fr:'tout',en:'all'},...cat.subs].map(s=>`<button data-s="${s.id}" class="${s.id===curSub?'on':''}">${t(s)}</button>`).join(''):'';
+    const list=P.filter(p=>(curCat==='all'||p.cat===curCat)&&(!curSub||p.sub===curSub));
+    const btn=(id,txt,full)=>`<a class="btn${full?' full':''}" href="${L(id)}" target="_blank" rel="noopener">${txt}</a>`;
+    document.getElementById('catalog').innerHTML=list.map(p=>{
+      const c=CATS.find(x=>x.id===p.cat), s=c.subs&&c.subs.find(x=>x.id===p.sub);
+      const lettre=p.cat==='lettres';
+      const b=btn(p.papier,lettre?(en?'printed':'imprimées'):(en?'paper poster':'affiche papier'),true)+btn(p.pdf,en?'PDF to print':'PDF à imprimer')+(p.en_?btn(p.en_,'in English'):'');
+      return `<div class="prod in"><div class="ph art"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div>
+        <p class="tag">${t(c)}${s?' · '+t(s):''}</p><h3>${t(p)}</h3><p>${en?p.den:p.dfr}</p>
+        ${lettre?'':`<div class="price">${en?'<b>€24</b> paper · <b>€10</b> PDF':'<b>24 €</b> papier · <b>10 €</b> PDF'}</div>`}<p class="formats">${lettre?(en?'printed and shipped, or PDF':'imprimées et envoyées, ou en PDF'):(en?'paper, free delivery in France, or PDF':'papier livraison offerte en France, ou PDF')}</p>
+        <div class="buy">${b}</div></div>`}).join('');
   }
-  renderBuy();
+  document.getElementById('cats').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;curCat=b.dataset.c;curSub=null;renderCatalog()});
+  document.getElementById('subs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;curSub=b.dataset.s==='null'?null:b.dataset.s;renderCatalog()});
+  renderCatalog();
   function setLang(l){
     document.documentElement.lang=l;
     document.querySelectorAll('[data-fr]').forEach(el=>{const t=el.getAttribute('data-'+l); if(t!==null) el.innerHTML=t;});
     document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
     try{localStorage.setItem('gdv-lang',l)}catch(e){}
-    renderBuy();
+    renderCatalog();
   }
   document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
   try{if(localStorage.getItem('gdv-lang')==='en') setLang('en')}catch(e){}
