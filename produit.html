@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gribouillis de vie</title>
+<style>
+@font-face{font-family:'Playwrite FR Trad';font-weight:200;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-200-normal.woff2) format('woff2')}
+@font-face{font-family:'Playwrite FR Trad';font-weight:300;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-300-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:400;font-display:swap;src:url(fonts/quicksand-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:500;font-display:swap;src:url(fonts/quicksand-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:600;font-display:swap;src:url(fonts/quicksand-latin-600-normal.woff2) format('woff2')}
+  :root{--ink:#1c1c1c;--soft:#5e5a56;--line:#e9e4de;--rose:#e9988c;--beige:#cdb596}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#fff;color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;font-size:17px;line-height:1.7;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .hand{font-family:'Playwrite FR Trad',cursive;font-weight:300;letter-spacing:.2px;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(6px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:120px}
+  .logo-img{height:104px;width:auto;display:block}
+  @media(max-width:700px){.logo-img{height:72px}}
+  .logo{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.25rem;text-decoration:none;white-space:nowrap}
+  .links{display:flex;gap:28px;align-items:center;font-size:.92rem}
+  .links a{text-decoration:none;color:var(--soft)}
+  .links a:hover{color:var(--ink)}
+  .lang{display:flex;gap:2px;font-size:.8rem}
+  .lang button{border:0;background:none;cursor:pointer;font:500 .8rem 'Quicksand';color:#aaa;padding:4px 7px}
+  .lang button.on{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+  /* hero = une affiche */
+  .hero{padding:30px 0 40px;text-align:center}
+  .hero h1{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.9rem,4.4vw,3rem);line-height:2;margin-bottom:40px;text-wrap:balance}
+  .poster{display:grid;grid-template-columns:repeat(6,1fr);gap:18px 14px;align-items:end;max-width:900px;margin:0 auto}
+  .it{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .it img{height:78px;width:auto;object-fit:contain}
+  .it span{font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.62rem;color:#333;line-height:1.5}
+  .center{grid-column:2 / span 4;grid-row:2 / span 2;position:relative;display:flex;align-items:center;justify-content:center;min-height:300px}
+  .center .wash{position:absolute;inset:-30px -10px;background:url(img/wash-rose.png) center/contain no-repeat;opacity:.9}
+  .center div{position:relative;max-width:380px}
+  .center p.hand{font-size:clamp(1.15rem,2.4vw,1.5rem)}
+  .center p.sub{margin-top:10px;font-size:.98rem;color:#3d3a37}
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:46px}
+  .btn{display:inline-block;padding:12px 26px;border:1.3px solid var(--ink);border-radius:999px;text-decoration:none;font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:.95rem;transition:.2s}
+  .btn.full{background:var(--ink);color:#fff}
+  .btn:hover{transform:translateY(-2px)}
+
+  /* sections */
+  section{padding:70px 0}
+  .title{text-align:center;margin-bottom:46px;position:relative}
+  .title h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:2;position:relative}
+  .title p{color:var(--soft);max-width:34em;margin:10px auto 0;position:relative}
+  .title .wash{position:absolute;left:50%;top:-55px;width:360px;height:220px;transform:translateX(-50%);background-position:center;background-size:contain;background-repeat:no-repeat;opacity:.85}
+  .w-beige{background-image:url(img/wash-beige.png)}.w-rose{background-image:url(img/wash-rose.png)}
+  .w-vert{background-image:url(img/wash-vert.png)}.w-bleu{background-image:url(img/wash-bleu.png)}.w-jaune{background-image:url(img/wash-jaune.png)}
+
+  /* créations */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 28px}
+  .prod{text-align:center}
+  .prod .ph{aspect-ratio:375/480;overflow:hidden;border-radius:6px;background:#fff}
+  .prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .prod:hover .ph img{transform:scale(1.03)}
+  .prod .ph.art{display:flex;align-items:center;justify-content:center;position:relative}
+  .prod .ph.art .wash{position:absolute;inset:8%;background-position:center;background-size:contain;background-repeat:no-repeat;opacity:.8}
+  #catalog .ph.art{aspect-ratio:2/3}
+  .prod .ph.art img{position:relative;width:auto;height:46%;object-fit:contain}
+  .prod h3{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.12rem;margin:18px 0 8px;line-height:1.9}
+  .prod p{font-size:.93rem;color:var(--soft);max-width:26em;margin:0 auto}
+  .price{margin-top:8px;font-size:.9rem}
+  .price b{font-weight:600}
+.buy{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .buy a{padding:8px 16px;font-size:.82rem}
+  .soon{display:inline-block;margin-top:8px;font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.8rem;color:#b06f62}
+
+
+  /* catalogue */
+  .cats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:-10px 0 14px}
+  .cats button,.subs button{border:1.2px solid var(--line);background:#fff;border-radius:999px;cursor:pointer;font:500 .88rem 'Quicksand';color:var(--soft);padding:8px 18px;transition:.2s}
+  .cats button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .subs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px;min-height:36px}
+  .subs button{font-size:.8rem;padding:6px 14px}
+  .subs button.on{border-color:var(--ink);color:var(--ink)}
+  .prod .tag{font-size:.75rem;color:#b06f62;letter-spacing:.3px;margin-top:14px}
+  .prod .tag+h3{margin-top:4px}
+  .formats{font-size:.82rem;color:var(--soft);margin-top:6px}
+  a.prod{display:block;color:inherit;text-decoration:none}
+  a.prod .ph img{transition:transform .5s}
+  a.prod:hover .ph img{transform:scale(1.03)}
+  #catalog .ph:not(.art){aspect-ratio:2/3;overflow:hidden;background:#f3ede6}
+  #catalog .ph:not(.art) img{width:100%;height:100%;object-fit:cover;display:block}
+  .see{display:inline-block;margin-top:12px;font-size:.85rem;color:#b06f62;border-bottom:1px solid currentColor}
+  /* galerie */
+  .gallery{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}
+  .gallery img{width:100%;height:100%;object-fit:cover;border-radius:6px;aspect-ratio:1}
+
+  /* étapes */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;text-align:center}
+  .step img{height:96px;width:auto;margin:0 auto 14px;object-fit:contain}
+  .step h3{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.1rem;margin-bottom:6px}
+  .step p{font-size:.94rem;color:var(--soft);max-width:22em;margin:0 auto}
+
+  /* qui suis-je */
+  .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .about .pic{position:relative;display:flex;align-items:center;justify-content:center;min-height:380px}
+  .about .pic .wash{position:absolute;inset:0;background:url(img/wash-beige.png) center/contain no-repeat}
+  .about .pic img{position:relative;width:min(58%,230px)}
+  .about h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.7rem,3.4vw,2.3rem);margin-bottom:14px;line-height:1.9}
+  .about .hello{font-family:'Playwrite FR Trad',cursive;font-weight:200;color:#b06f62;margin-bottom:18px;line-height:2}
+  .about p{color:#3d3a37;margin-bottom:14px}
+  .about .sign{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.5rem;margin-top:34px;line-height:2}
+  .chips{display:flex;flex-wrap:wrap;gap:14px 18px;margin:22px 0 6px;line-height:2;font-family:'Playwrite FR Trad',cursive;font-weight:200;font-size:.82rem}
+  .chips span::before{content:'♡ ';color:var(--rose)}
+
+  /* faq */
+  .faq{max-width:740px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:18px 4px}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:'+';font-size:1.3rem;line-height:1;color:var(--rose)}
+  details[open] summary::after{content:'–'}
+  details p{color:var(--soft);margin-top:10px;font-size:.96rem}
+
+  /* fin */
+  .end{text-align:center;padding:60px 24px 70px;position:relative}
+  .end .deco{display:flex;justify-content:center;gap:30px;align-items:end;margin-bottom:26px}
+  .end .deco img{height:90px;width:auto}
+  .end h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:2}
+  .end p{color:var(--soft);margin:14px 0 28px}
+  footer{border-top:1px solid var(--line);padding:26px 0;font-size:.85rem;color:#8a857f}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+  footer .logo{font-size:1rem;color:var(--ink)}
+  footer .insta{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+  footer .insta:hover{color:var(--ink)}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media (max-width:860px){
+    .links a{display:none}
+    .poster{grid-template-columns:repeat(3,1fr);gap:16px 8px}
+    .center{grid-column:1 / -1;grid-row:auto;min-height:250px;order:-1;margin-bottom:10px}
+    .it img{height:62px}
+    .grid,.steps{grid-template-columns:1fr 1fr}
+    .about{grid-template-columns:1fr;gap:20px}
+    .about .pic{min-height:260px}
+    .gallery{grid-template-columns:1fr 1fr}.gallery img:first-child{grid-column:1 / -1}
+  }
+  @media (max-width:540px){
+    body{font-size:16px}
+    .grid,.steps{grid-template-columns:1fr}
+    .prod .ph{max-width:340px;margin:0 auto}
+    .poster .it:nth-child(n+11){display:none}
+    section{padding:60px 0}
+  }
+
+  /* page produit */
+  .pp{padding:40px 0 90px}
+  .back{display:inline-block;font-size:.88rem;color:var(--soft);text-decoration:none;margin-bottom:26px}
+  .back:hover{color:var(--ink)}
+  .pgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:start}
+  .gal{display:grid;grid-template-columns:76px 1fr;gap:14px;position:sticky;top:90px}
+  .thumbs{display:flex;flex-direction:column;gap:10px;max-height:78vh;overflow:auto;scrollbar-width:thin}
+  .thumbs button{border:1.5px solid transparent;border-radius:6px;padding:0;background:#f3ede6;cursor:pointer;overflow:hidden;flex:0 0 auto;width:72px;height:72px}
+  .thumbs button.on{border-color:var(--ink)}
+  .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+  .main{position:relative;background:#f3ede6;border-radius:8px;overflow:hidden;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center}
+  .main img{width:100%;height:100%;object-fit:contain;display:block}
+  .main .nav-b{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.88);cursor:pointer;font-size:1.2rem;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  .main .prev{left:12px}.main .next{right:12px}
+  .main .count{position:absolute;bottom:12px;right:14px;background:rgba(255,255,255,.88);border-radius:999px;font-size:.78rem;padding:3px 10px;color:var(--soft)}
+  .main.art{aspect-ratio:2/3}
+  .info .tag{font-size:.8rem;color:#b06f62;letter-spacing:.3px}
+  .info h1{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.7;margin:8px 0 14px}
+  .info .lead{color:var(--soft);font-size:1rem;margin-bottom:26px}
+  .fmt-l{font-size:.85rem;color:var(--soft);margin-bottom:10px}
+  .fmts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+  .fmts button{border:1.2px solid var(--line);background:#fff;border-radius:12px;padding:12px 16px;cursor:pointer;font:500 .9rem 'Quicksand';color:var(--soft);text-align:left;min-width:150px}
+  .fmts button b{display:block;font-size:1.05rem;color:var(--ink);margin-top:2px}
+  .fmts button.on{border-color:var(--ink);color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset}
+  .cta{display:block;text-align:center;background:var(--ink);color:#fff;text-decoration:none;border-radius:999px;padding:15px 22px;font-weight:600;margin-bottom:10px}
+  .cta:hover{opacity:.9}
+  .cta-note{font-size:.8rem;color:var(--soft);text-align:center;margin-bottom:30px}
+  .det h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.05rem;margin:26px 0 10px}
+  .det ul{padding-left:18px;color:var(--soft);font-size:.95rem}
+  .det li{margin:5px 0}
+  .det p{color:var(--soft);font-size:.95rem}
+  @media (max-width:860px){
+    .pgrid{grid-template-columns:1fr;gap:30px}
+    .gal{grid-template-columns:1fr;position:static}
+    .thumbs{flex-direction:row;order:2;max-height:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><img src="img/logo.png?v=2" alt="gribouillis de vie" class="logo-img"></a>
+    <nav class="links">
+      <a href="index.html#creations" data-fr="mes créations" data-en="my creations">mes créations</a>
+      <a href="index.html#comment" data-fr="comment ça marche" data-en="how it works">comment ça marche</a>
+      <a href="index.html#moi" data-fr="qui suis-je" data-en="about me">qui suis-je</a>
+      <a href="index.html#faq" data-fr="questions" data-en="questions">questions</a>
+      <span class="lang"><button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button></span>
+    </nav>
+  </div>
+</header>
+
+<main class="pp"><div class="wrap">
+  <a class="back" href="index.html#creations" data-fr="← toutes les créations" data-en="← all creations">← toutes les créations</a>
+  <div class="pgrid" id="pg"></div>
+</div></main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">gribouillis de vie</span>
+    <span data-fr="Créations originales · France" data-en="Original designs · France">Créations originales · France</span>
+    <a class="insta" href="https://www.instagram.com/gribouillisdevie/" target="_blank" rel="noopener">Instagram · @gribouillisdevie</a>
+  </div>
+</footer>
+
+<script src="etsy-data.js"></script>
+<script src="catalog.js"></script>
+<script>
+  const slug=new URLSearchParams(location.search).get('p');
+  const p=P.find(x=>x.slug===slug)||P[0];
+  let fmt=new URLSearchParams(location.search).get('f')||'papier', idx=0;
+  const T={
+    fr:{papier:'affiche papier',pdf:'PDF à imprimer',lp:'lettres imprimées',en_:'PDF en anglais',format:'choisissez le format',
+      cta:'commander sur Etsy',note:'Le paiement se fait pour l’instant sur Etsy, en toute sécurité.',
+      what:'ce que vous recevez',how:'comment ça marche',
+      papierL:['Une affiche personnalisée, imprimée sur papier épais, format A3 (A4 sur demande)','Le prénom ou le nom de votre choix, ou sans prénom','En français ou en anglais, au choix','Livraison offerte en France, préparée sous 3 à 5 jours','Affiche seule : sans cadre ni tampon'],
+      pdfL:['Un fichier PDF personnalisé, en haute qualité','Le prénom ou le nom de votre choix, ou sans prénom','En français ou en anglais, au choix','À imprimer chez vous ou chez un imprimeur, en A3 ou en A4','Aucun envoi postal'],
+      howL:['Choisissez le format et la langue','Indiquez le prénom à inscrire au moment de la commande','Notez la date de chaque moment, au fil de votre histoire'],
+      lpL:['Les lettres imprimées en recto verso, avec les enveloppes à découper et plier','Livraison offerte en France'],
+      ldL:['Un fichier PDF à imprimer chez vous, lettres en recto verso','Aucun envoi postal'],
+      leL:['Le même pack, en anglais, en PDF à imprimer','Aucun envoi postal'],
+      howLL:['Choisissez le format','Écrivez vos lettres','Glissez-les dans leurs enveloppes et offrez-les'],
+      lt:'les mises en scène sont des idées de décoration ; vous recevez l’affiche sans filigrane.'},
+    en:{papier:'paper poster',pdf:'PDF to print',lp:'printed letters',en_:'PDF in English',format:'choose the format',
+      cta:'order on Etsy',note:'Payment is handled securely on Etsy for now.',
+      what:'what you get',how:'how it works',
+      papierL:['A personalised poster printed on thick paper, A3 (A4 on request)','The name of your choice, or no name','In French or in English','Free delivery in France, prepared within 3 to 5 days','Poster only: no frame or stamp'],
+      pdfL:['A personalised high-quality PDF file','The name of your choice, or no name','In French or in English','Print it at home or at a print shop, A3 or A4','Nothing is shipped'],
+      howL:['Choose the format and the language','Enter the name when you order','Write down the date of each moment as your story unfolds'],
+      lpL:['The letters printed double-sided, with envelopes to cut out and fold','Free delivery in France'],
+      ldL:['A PDF file to print at home, letters double-sided','Nothing is shipped'],
+      leL:['The same pack in English, as a PDF to print','Nothing is shipped'],
+      howLL:['Choose the format','Write your letters','Slip them into their envelopes and give them'],
+      lt:'the room settings are decoration ideas; your poster comes without a watermark.'}
+  };
+  function render(){
+    const en=document.documentElement.lang==='en', t=T[en?'en':'fr'], tt=o=>en?o.en:o.fr;
+    const c=CATS.find(x=>x.id===p.cat), s=c.subs&&c.subs.find(x=>x.id===p.sub);
+    const lettre=p.cat==='lettres';
+    const F=lettre?[['papier',t.lp,p.pp],['pdf',t.pdf,p.pd],['en_',t.en_,p.pd]]:[['papier',t.papier,'24,00'],['pdf',t.pdf,'10,00']];
+    if(!F.find(f=>f[0]===fmt)) fmt='papier';
+    const id=p[fmt], d=window.ETSY&&ETSY[id];
+    const imgs=d?d[1]:[];
+    if(idx>=imgs.length) idx=0;
+    const lead=(ETSY[p.papier]&&ETSY[p.papier][0]&&!en)?ETSY[p.papier][0]:(en?p.den:p.dfr);
+    document.title=tt(p)+' · Gribouillis de vie';
+    const gal=imgs.length?`<div class="gal"><div class="thumbs">${imgs.map((m,i)=>`<button data-i="${i}" class="${i===idx?'on':''}"><img src="${etsyImg(m,'340x270')}" alt="" loading="lazy"></button>`).join('')}</div>
+      <div class="main"><img id="mi" src="${etsyImg(imgs[idx],'794xN')}" alt="${tt(p)}">
+      <button class="nav-b prev" aria-label="précédente">‹</button><button class="nav-b next" aria-label="suivante">›</button><span class="count">${idx+1} / ${imgs.length}</span></div></div>`
+      :`<div class="main art prod"><div class="ph art" style="width:100%;height:100%"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div></div>`;
+    const list=lettre?(fmt==='papier'?t.lpL:fmt==='pdf'?t.ldL:t.leL):(fmt==='papier'?t.papierL:t.pdfL);
+    const how=lettre?t.howLL:t.howL;
+    document.getElementById('pg').innerHTML=gal+`<div class="info">
+      <p class="tag">${tt(c)}${s?' · '+tt(s):''}</p><h1>${tt(p)}</h1><p class="lead">${lead}</p>
+      <p class="fmt-l">${t.format}</p>
+      <div class="fmts">${F.map(f=>`<button data-f="${f[0]}" class="${f[0]===fmt?'on':''}">${f[1]}<b>${en?'€'+f[2]:f[2]+' €'}</b></button>`).join('')}</div>
+      <a class="cta" id="buy" href="${L(id)}" target="_blank" rel="noopener">${t.cta}</a>
+      <p class="cta-note">${t.note}</p>
+      <div class="det"><h2>${t.what}</h2><ul>${list.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <h2>${t.how}</h2><ul>${how.map(x=>`<li>${x}</li>`).join('')}</ul>${lettre?'':`<p style="margin-top:18px;font-size:.85rem">${t.lt}</p>`}</div></div>`;
+  }
+  function show(i){const d=ETSY[p[fmt]];if(!d)return;const n=d[1].length;idx=(i+n)%n;document.getElementById('mi').src=etsyImg(d[1][idx],'794xN');
+    document.querySelectorAll('.thumbs button').forEach((b,k)=>b.classList.toggle('on',k===idx));document.querySelector('.count').textContent=(idx+1)+' / '+n;
+    const tb=document.querySelectorAll('.thumbs button')[idx];tb&&tb.scrollIntoView({block:'nearest',inline:'nearest'});}
+  document.getElementById('pg').addEventListener('click',e=>{
+    const th=e.target.closest('.thumbs button'); if(th){show(+th.dataset.i);return}
+    if(e.target.closest('.prev')){show(idx-1);return}
+    if(e.target.closest('.next')){show(idx+1);return}
+    const f=e.target.closest('.fmts button'); if(f){fmt=f.dataset.f;idx=0;render();history.replaceState(null,'','?p='+p.slug+'&f='+fmt)}
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1)});
+  let sx=null;document.addEventListener('touchstart',e=>{if(e.target.closest('.main'))sx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(idx+(dx<0?1:-1));sx=null});
+  function setLang(l){document.documentElement.lang=l;document.querySelectorAll('[data-fr]').forEach(el=>{const v=el.getAttribute('data-'+l);if(v!==null)el.innerHTML=v});
+    document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));try{localStorage.setItem('gdv-lang',l)}catch(e){}render()}
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  render(); try{if(localStorage.getItem('gdv-lang')==='en')setLang('en')}catch(e){}
+</script>
+</body>
+</html>
