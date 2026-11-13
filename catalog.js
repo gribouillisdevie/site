@@ -32,3 +32,5 @@
     {slug:'lettres-plus-tard',cat:'lettres',sub:'collections',ic:'i-mains',w:'beige',fr:'lettres à mon enfant pour plus tard',en:'letters to my child for later',dfr:'À ouvrir le jour de ses 18 ans, de son premier amour…',den:'To open on their 18th birthday, their first love…',papier:4608125207,pp:'15,90',pd:'9,90',pdf:4608140982,en_:4608153381},
     {slug:'lettres-souvenirs',cat:'lettres',sub:'collections',ic:'i-poussette',w:'vert',fr:"lettres souvenirs d'enfance",en:'childhood memories letters',dfr:"Pour raconter à son enfant ses premières années.",den:'To tell your child about their first years.',papier:4608145578,pp:'16,90',pd:'13,90',pdf:4608121561,en_:4608153871},
   ];
+// Les photos du site passent en premier, puis celles d'Etsy
+(function(){var P=window.P||[];P.forEach(function(p){var s=window.SCENES[p.slug];if(!s)return;['papier','pdf'].forEach(function(f){var d=window.ETSY[p[f]];if(d)window.ETSY[p[f]]=[d[0],s.concat(d[1])];else if(p[f])window.ETSY[p[f]]=['',s.slice()]})})})();
