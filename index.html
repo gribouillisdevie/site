@@ -4,7 +4,13 @@
 <meta name="p:domain_verify" content="4f2738c95150c0bace252824027265f5"/>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gribouillis de vie</title>
+<title>Gribouillis de vie · affiches premières fois et lettres à écrire</title>
+<meta name="description" content="Affiches personnalisées des premières fois (bébé, enfant, maman, papa), affiches à dater et lettres à écrire. Créations originales dessinées en France, en A3 imprimé ou en PDF.">
+<link rel="canonical" href="https://gribouillisdevie.fr/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gribouillis de vie">
+<meta property="og:title" content="Gribouillis de vie">
+<meta property="og:url" content="https://gribouillisdevie.fr/">
 <style>
 @font-face{font-family:'Playwrite FR Trad';font-weight:200;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-200-normal.woff2) format('woff2')}
 @font-face{font-family:'Playwrite FR Trad';font-weight:300;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-300-normal.woff2) format('woff2')}
@@ -161,7 +167,7 @@
 </style>
 </head>
 <body>
-<div class="noel" style="background:#2f4a3a;color:#fff;text-align:center;font-size:14px;line-height:1.45;padding:9px 16px"><span data-fr="Noël : commandez avant le 15 décembre pour recevoir vos affiches et lettres imprimées à temps." data-en="Christmas: order by December 15 to receive your printed posters and letters in time.">Noël : commandez avant le 15 décembre pour recevoir vos affiches et lettres imprimées à temps.</span> <a href="produit.html?p=coffret-lettres" style="color:#f4d9a8;font-weight:600;white-space:nowrap" data-fr="Idée cadeau : le coffret de 41 lettres →" data-en="Gift idea: the 41-letter box →">Idée cadeau : le coffret de 41 lettres →</a></div>
+<div class="noel" style="background:#2f4a3a;color:#fff;text-align:center;font-size:14px;line-height:1.45;padding:9px 16px"><span data-fr="Noël : commandez avant le 15 décembre pour recevoir vos affiches et lettres imprimées à temps." data-en="Christmas: order by December 15 to receive your printed posters and letters in time.">Noël : commandez avant le 15 décembre pour recevoir vos affiches et lettres imprimées à temps.</span> <a href="coffret-lettres.html" style="color:#f4d9a8;font-weight:600;white-space:nowrap" data-fr="Idée cadeau : le coffret de 41 lettres →" data-en="Gift idea: the 41-letter box →">Idée cadeau : le coffret de 41 lettres →</a></div>
 
 <header>
   <div class="wrap nav">
@@ -325,7 +331,7 @@
       const c=CATS.find(x=>x.id===p.cat), s=c.subs&&c.subs.find(x=>x.id===p.sub);
       const lettre=p.cat==='lettres', d=window.ETSY&&ETSY[p.papier];
       const ph=d?`<div class="ph"><img src="${etsyImg(d[1][0],'570xN')}" alt="${t(p)}" loading="lazy"></div>`:`<div class="ph art"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div>`;
-      return `<a class="prod in" href="produit.html?p=${p.slug}">${ph}
+      return `<a class="prod in" href="${p.slug}.html">${ph}
         <p class="tag">${t(c)}${s?' · '+t(s):''}</p><h3>${t(p)}</h3><p>${en?p.den:p.dfr}</p>
         <div class="price">${lettre?(en?`<b>€${p.pp}</b> printed · <b>€${p.pd}</b> PDF`:`<b>${p.pp} €</b> imprimées · <b>${p.pd} €</b> PDF`):(en?'<b>€24</b> paper · <b>€10</b> PDF':'<b>24 €</b> papier · <b>10 €</b> PDF')}</div>
         <span class="see">${en?'see the product':'voir le produit'} →</span></a>`}).join('');

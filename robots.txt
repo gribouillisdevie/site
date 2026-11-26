@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /outils/
 
 Sitemap: https://gribouillisdevie.fr/sitemap.xml
