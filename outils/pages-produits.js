@@ -21,9 +21,9 @@ for (const p of P) {
   const lettre = p.cat === 'lettres';
   const c = CATS.find(x => x.id === p.cat), s = c.subs && c.subs.find(x => x.id === p.sub);
   const url = `${SITE}/${p.slug}.html`;
-  const genre = lettre ? 'lettres à écrire' : (p.cat === 'voyage' ? 'affiche voyage' : 'affiche personnalisée');
+  const genre = p.livre ? "livre d'énigmes à imprimer" : lettre ? 'lettres à écrire' : (p.cat === 'voyage' ? 'affiche voyage' : 'affiche personnalisée');
   const title = `${cap(p.fr)} · ${genre} | Gribouillis de vie`;
-  const suite = lettre
+  const suite = p.livre ? `Livre PDF à imprimer (${p.prix} €), solutions incluses.` : lettre
     ? `Lettres imprimées livrées en France (${p.pp} €) ou PDF à imprimer (${p.pd} €).`
     : 'Affiche A3 imprimée, livraison offerte en France (24 €), ou PDF à imprimer (10 €).';
   const desc = `${strip(p.dfr)} ${suite}`;

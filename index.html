@@ -333,7 +333,7 @@
       const ph=d?`<div class="ph"><img src="${etsyImg(d[1][0],'570xN')}" alt="${t(p)}" loading="lazy"></div>`:`<div class="ph art"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div>`;
       return `<a class="prod in" href="${p.slug}.html">${ph}
         <p class="tag">${t(c)}${s?' · '+t(s):''}</p><h3>${t(p)}</h3><p>${en?p.den:p.dfr}</p>
-        <div class="price">${lettre?(en?`<b>€${p.pp}</b> printed · <b>€${p.pd}</b> PDF`:`<b>${p.pp} €</b> imprimées · <b>${p.pd} €</b> PDF`):(en?'<b>€24</b> paper · <b>€10</b> PDF':'<b>24 €</b> papier · <b>10 €</b> PDF')}</div>
+        <div class="price">${p.livre?(en?`<b>€${p.prix}</b> PDF to print`:`<b>${p.prix} €</b> PDF à imprimer`):lettre?(en?`<b>€${p.pp}</b> printed · <b>€${p.pd}</b> PDF`:`<b>${p.pp} €</b> imprimées · <b>${p.pd} €</b> PDF`):(en?'<b>€24</b> paper · <b>€10</b> PDF':'<b>24 €</b> papier · <b>10 €</b> PDF')}</div>
         <span class="see">${en?'see the product':'voir le produit'} →</span></a>`}).join('');
   }
   document.getElementById('cats').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;curCat=b.dataset.c;curSub=null;renderCatalog()});

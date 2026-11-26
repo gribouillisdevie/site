@@ -9,7 +9,9 @@
       {id:'grossesse',fr:'grossesse',en:'pregnancy'},{id:'enfance',fr:'enfance',en:'childhood'}]},
     {id:'voyage',fr:'affiches voyage',en:'travel posters'},
     {id:'lettres',fr:'lettres à écrire',en:'letters to write',subs:[
-      {id:'collections',fr:'les collections',en:'the collections'},{id:'coffret',fr:'le coffret',en:'the gift box'}]}
+      {id:'collections',fr:'les collections',en:'the collections'},{id:'coffret',fr:'le coffret',en:'the gift box'}]},
+    {id:'livres',fr:"livres d'énigmes",en:'puzzle books',subs:[
+      {id:'noel',fr:'spécial Noël',en:'Christmas'},{id:'age',fr:'par âge',en:'by age'}]}
   ];
   window.P=[
     {slug:'bebe',cat:'pf',sub:'bebe',ic:'i-soleil',w:'rose',fr:'les premières fois de bébé',en:"baby's first times",dfr:"Avec le prénom de l'enfant. Vous notez la date de chaque première fois.",den:"With the child's name. Write down the date of each first time.",papier:4572582204,pdf:4403564080},
@@ -31,6 +33,12 @@
     {slug:'lettres-couple',cat:'lettres',sub:'collections',ic:'i-ballons-coeurs',w:'rose',fr:'lettres de couple',en:'letters for couples',dfr:'Des lettres à écrire à la personne qu’on aime.',den:'Letters to write to the one you love.',papier:4608125849,pp:'13,90',pd:'6,90',pdf:4608122075,en_:4608154361},
     {slug:'lettres-plus-tard',cat:'lettres',sub:'collections',ic:'i-mains',w:'beige',fr:'lettres à mon enfant pour plus tard',en:'letters to my child for later',dfr:'À ouvrir le jour de ses 18 ans, de son premier amour…',den:'To open on their 18th birthday, their first love…',papier:4608125207,pp:'13,90',pd:'6,90',pdf:4608140982,en_:4608153381},
     {slug:'lettres-souvenirs',cat:'lettres',sub:'collections',ic:'i-poussette',w:'vert',fr:"lettres souvenirs d'enfance",en:'childhood memories letters',dfr:"Pour raconter à son enfant ses premières années.",den:'To tell your child about their first years.',papier:4608145578,pp:'13,90',pd:'6,90',pdf:4608121561,en_:4608153871},
+    {slug:"enigmes-noel-2-5-ans",cat:'livres',sub:'noel',ic:'i-soleil',w:'rose',livre:1,fr:"enquêtes de Noël · 2-5 ans",en:"Christmas mysteries \u00b7 ages 2-5",dfr:"24 petites enquêtes, une par jour du 1er au 24 décembre, avec des indices en images.",den:"24 little mysteries, one a day from 1 to 24 December, with picture clues.",prix:'5,90',papier:4626431201,pdf:4626431201},
+    {slug:"enigmes-noel-5-10-ans",cat:'livres',sub:'noel',ic:'i-lune',w:'vert',livre:1,fr:"enquêtes de Noël · 5-10 ans",en:"Christmas mysteries \u00b7 ages 5-10",dfr:"24 enquêtes de l'Avent, de plus en plus difficiles, de 4 à 8 suspects.",den:"24 Advent mysteries, harder and harder, with 4 to 8 suspects.",prix:'5,90',papier:4626432215,pdf:4626432215},
+    {slug:"enigmes-2-4-ans",cat:'livres',sub:'age',ic:'i-abc',w:'jaune',livre:1,fr:"34 enquêtes · 2-4 ans",en:"34 mysteries \u00b7 ages 2-4",dfr:"Les petits animaux font des bêtises : un indice en image, et on trouve le coupable.",den:"The little animals get up to mischief: one picture clue, and you find the culprit.",prix:'6,90',papier:4626432615,pdf:4626432615},
+    {slug:"enigmes-4-7-ans",cat:'livres',sub:'age',ic:'i-coeurs-bocal',w:'vert',livre:1,fr:"34 enquêtes · 4-7 ans",en:"34 mysteries \u00b7 ages 4-7",dfr:"Les petits monstres mènent l'enquête : des indices illustrés, 3 niveaux.",den:"The little monsters investigate: illustrated clues, 3 levels.",prix:'6,90',papier:4626443774,pdf:4626443774},
+    {slug:"enigmes-7-10-ans",cat:'livres',sub:'age',ic:'i-ballons-coeurs',w:'bleu',livre:1,fr:"34 enquêtes · 7-10 ans",en:"34 mysteries \u00b7 ages 7-10",dfr:"Jusqu'à 8 suspects et des indices pièges, solutions expliquées pas à pas.",den:"Up to 8 suspects and tricky clues, step-by-step solutions.",prix:'6,90',papier:4626444164,pdf:4626444164},
+    {slug:"enigmes-mystere-au-parc",cat:'livres',sub:'age',ic:'i-lune',w:'beige',livre:1,fr:"mystère au parc d'attractions · dès 10 ans",en:"mystery at the amusement park \u00b7 ages 10+",dfr:"Une grande enquête de 54 pages, 320 suspects, 5 chapitres et les solutions en QR code.",den:"One big 54-page investigation, 320 suspects, 5 chapters and QR-code solutions.",prix:'7,90',papier:4626433805,pdf:4626433805},
   ];
 // Les photos du site passent en premier, puis celles d'Etsy
 (function(){var P=window.P||[];P.forEach(function(p){var s=window.SCENES[p.slug];if(!s)return;['papier','pdf'].forEach(function(f){var d=window.ETSY[p[f]];if(d)window.ETSY[p[f]]=[d[0],s.concat(d[1])];else if(p[f])window.ETSY[p[f]]=['',s.slice()]})})})();

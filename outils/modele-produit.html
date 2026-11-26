@@ -238,6 +238,8 @@
       what:'ce que vous recevez',how:'comment ça marche',
       papierL:['Une affiche personnalisée, imprimée sur papier épais, format A3 (A4 sur demande)','Le prénom ou le nom de votre choix, ou sans prénom','En français ou en anglais, au choix','Livraison offerte en France, préparée sous 3 à 5 jours','Affiche seule : sans cadre ni tampon'],
       pdfL:['Un fichier PDF personnalisé, en haute qualité','Le prénom ou le nom de votre choix, ou sans prénom','En français ou en anglais, au choix','À imprimer chez vous ou chez un imprimeur, en A3 ou en A4','Aucun envoi postal'],
+      livreL:['Un livre PDF au format A4, en français','Les solutions et un diplôme de détective','À imprimer chez vous, autant de fois que vous voulez','Disponible tout de suite après l’achat','Aucun envoi postal'],
+      howLiv:['Commandez sur Etsy, le PDF arrive tout de suite','Imprimez les pages, en couleur ou en noir et blanc','Observez les suspects, lisez les indices… et trouvez le coupable !'],livre:'livre PDF à imprimer',
       howL:['Choisissez le format et la langue','Indiquez le prénom à inscrire au moment de la commande','Notez la date de chaque moment, au fil de votre histoire'],
       lpL:['Les lettres imprimées en recto verso, avec les enveloppes à découper et plier','Livraison offerte en France'],
       ldL:['Un fichier PDF à imprimer chez vous, lettres en recto verso','Aucun envoi postal'],
@@ -249,6 +251,8 @@
       what:'what you get',how:'how it works',
       papierL:['A personalised poster printed on thick paper, A3 (A4 on request)','The name of your choice, or no name','In French or in English','Free delivery in France, prepared within 3 to 5 days','Poster only: no frame or stamp'],
       pdfL:['A personalised high-quality PDF file','The name of your choice, or no name','In French or in English','Print it at home or at a print shop, A3 or A4','Nothing is shipped'],
+      livreL:['An A4 PDF book, in French','Solutions and a detective diploma','Print it at home as many times as you like','Available right after purchase','Nothing is shipped'],
+      howLiv:['Order on Etsy, the PDF arrives straight away','Print the pages, in colour or black and white','Look at the suspects, read the clues… and find the culprit!'],livre:'PDF book to print',
       howL:['Choose the format and the language','Enter the name when you order','Write down the date of each moment as your story unfolds'],
       lpL:['The letters printed double-sided, with envelopes to cut out and fold','Free delivery in France'],
       ldL:['A PDF file to print at home, letters double-sided','Nothing is shipped'],
@@ -260,7 +264,7 @@
     const en=document.documentElement.lang==='en', t=T[en?'en':'fr'], tt=o=>en?o.en:o.fr;
     const c=CATS.find(x=>x.id===p.cat), s=c.subs&&c.subs.find(x=>x.id===p.sub);
     const lettre=p.cat==='lettres';
-    const F=lettre?[['papier',t.lp,p.pp],['pdf',t.pdf,p.pd],['en_',t.en_,p.pd]]:[['papier',t.papier,'24,00'],['pdf',t.pdf,'10,00']];
+    const F=p.livre?[['papier',t.livre,p.prix]]:lettre?[['papier',t.lp,p.pp],['pdf',t.pdf,p.pd],['en_',t.en_,p.pd]]:[['papier',t.papier,'24,00'],['pdf',t.pdf,'10,00']];
     if(!F.find(f=>f[0]===fmt)) fmt='papier';
     const id=p[fmt], d=window.ETSY&&ETSY[id];
     const imgs=d?d[1]:[];
@@ -271,8 +275,8 @@
       <div class="main"><img id="mi" src="${etsyImg(imgs[idx],'794xN')}" alt="${tt(p)}">
       <button class="nav-b prev" aria-label="précédente">‹</button><button class="nav-b next" aria-label="suivante">›</button><span class="count">${idx+1} / ${imgs.length}</span></div></div>`
       :`<div class="main art prod"><div class="ph art" style="width:100%;height:100%"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div></div>`;
-    const list=lettre?(fmt==='papier'?t.lpL:fmt==='pdf'?t.ldL:t.leL):(fmt==='papier'?t.papierL:t.pdfL);
-    const how=lettre?t.howLL:t.howL;
+    const list=p.livre?t.livreL:lettre?(fmt==='papier'?t.lpL:fmt==='pdf'?t.ldL:t.leL):(fmt==='papier'?t.papierL:t.pdfL);
+    const how=p.livre?t.howLiv:lettre?t.howLL:t.howL;
     document.getElementById('pg').innerHTML=gal+`<div class="info">
       <p class="tag">${tt(c)}${s?' · '+tt(s):''}</p><h1>${tt(p)}</h1><p class="lead">${lead}</p>
       <p class="fmt-l">${t.format}</p>
@@ -280,7 +284,7 @@
       <a class="cta" id="buy" href="${L(id)}" target="_blank" rel="noopener">${t.cta}</a>
       <p class="cta-note">${t.note}</p>
       <div class="det"><h2>${t.what}</h2><ul>${list.map(x=>`<li>${x}</li>`).join('')}</ul>
-      <h2>${t.how}</h2><ul>${how.map(x=>`<li>${x}</li>`).join('')}</ul>${lettre?'':`<p style="margin-top:18px;font-size:.85rem">${t.lt}</p>`}</div></div>`;
+      <h2>${t.how}</h2><ul>${how.map(x=>`<li>${x}</li>`).join('')}</ul>${(lettre||p.livre)?'':`<p style="margin-top:18px;font-size:.85rem">${t.lt}</p>`}</div></div>`;
   }
   function show(i){const d=ETSY[p[fmt]];if(!d)return;const n=d[1].length;idx=(i+n)%n;document.getElementById('mi').src=etsyImg(d[1][idx],'794xN');
     document.querySelectorAll('.thumbs button').forEach((b,k)=>b.classList.toggle('on',k===idx));document.querySelector('.count').textContent=(idx+1)+' / '+n;
