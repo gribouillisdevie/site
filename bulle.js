@@ -1,8 +1,8 @@
-/* Bulle « énigme offerte + -15 % » : apparaît après quelques secondes, se ferme et ne revient pas pendant 7 jours. */
+/* Bulle « énigme offerte + -15 % » : apparaît après quelques secondes, revient à chaque nouvelle visite (fermée = cachée jusqu'à la fin de la visite). */
 (function(){
   var KEY='gdv-bulle-fermee', page=location.pathname;
   if(/enigme-offerte|merci-enigme/.test(page)) return;
-  try{ var t=+localStorage.getItem(KEY); if(t && Date.now()-t < 7*864e5) return; }catch(e){}
+  try{ if(sessionStorage.getItem(KEY)) return; }catch(e){}
   var css=document.createElement('style');
   css.textContent=
    '.gdv-bulle{position:fixed;right:18px;bottom:18px;z-index:50;max-width:300px;background:#fff;border-radius:18px;box-shadow:0 12px 34px rgba(60,40,30,.18);padding:18px 18px 16px;font-family:Quicksand,system-ui,sans-serif;color:#1c1c1c;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s}'+
@@ -20,9 +20,9 @@
   d.innerHTML='<button aria-label="Fermer">×</button><b>Une enquête de Noël offerte</b>'+
     '<p>Une énigme d\'Inspecteur Gribouille à imprimer, et <span class="pct">-15 %</span> sur la boutique.</p>'+
     '<a class="go" href="enigme-offerte.html">Je la reçois →</a>';
-  function close(){ d.classList.remove('on'); try{localStorage.setItem(KEY,Date.now())}catch(e){} setTimeout(function(){d.remove()},400); }
+  function close(){ d.classList.remove('on'); try{sessionStorage.setItem(KEY,1)}catch(e){} setTimeout(function(){d.remove()},400); }
   d.querySelector('button').onclick=close;
-  d.querySelector('a.go').onclick=function(){ try{localStorage.setItem(KEY,Date.now())}catch(e){} };
+  d.querySelector('a.go').onclick=function(){ try{sessionStorage.setItem(KEY,1)}catch(e){} };
   function show(){ if(document.documentElement.lang==='en') return; document.body.appendChild(d); requestAnimationFrame(function(){d.classList.add('on')}); }
   setTimeout(show,6000);
 })();

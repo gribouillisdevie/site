@@ -64,6 +64,20 @@
   .pts{list-style:none;margin:18px 0 0}
   .pts li{padding-left:28px;position:relative;margin:8px 0}
   .pts li:before{content:'✓';position:absolute;left:0;color:#6e5240;font-weight:600}
+  .nl{max-width:520px;margin:46px auto 0;background:#fff;border-radius:22px;padding:34px 30px 26px;position:relative;text-align:center;box-shadow:0 12px 34px rgba(60,40,30,.10)}
+  .nl:before{content:'';position:absolute;inset:8px;border:1.5px dashed #e9988c;border-radius:16px;pointer-events:none}
+  .nl-t{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.55rem;line-height:1.8}
+  .nl-s{color:var(--soft);margin:2px 0 22px}
+  .nl .pct{color:#c9726a;font-weight:600}
+  .nl-l{display:block;text-align:left;font-size:.9rem;color:var(--soft);margin:0 4px 6px}
+  .nl-i{width:100%;font:500 1rem 'Quicksand',sans-serif;padding:13px 16px;border:1.3px solid var(--line);border-radius:12px;background:#fdfbf9;color:var(--ink);outline:none;position:relative}
+  .nl-i:focus{border-color:#cdb596}
+  .nl-c{display:flex;gap:10px;text-align:left;font-size:.84rem;line-height:1.5;color:var(--soft);margin:16px 4px 20px;cursor:pointer;position:relative}
+  .nl-c input{margin-top:3px;accent-color:#6e5240;width:16px;height:16px;flex:none}
+  .nl-b{position:relative;border:0;cursor:pointer;background:#6e5240;color:#fff;border-radius:999px;padding:14px 30px;font:600 1rem 'Quicksand',sans-serif;width:100%}
+  .nl-b:disabled{opacity:.6}
+  .nl-e{color:#b5544c;font-size:.88rem;margin-top:12px}
+  .nl-small{font-size:.78rem;color:#8a857f;margin-top:14px}
   .formbox{max-width:560px;margin:40px auto 0}
   .formbox iframe{width:100%;height:520px;border:0;display:block}
   .note{font-size:.82rem;color:#8a857f;max-width:560px;margin:8px auto 0}
@@ -97,10 +111,38 @@
       </ul>
     </div>
   </div>
-  <div class="formbox">
-    <iframe src="https://f6365c12.sibforms.com/v2/serve/MUIFAHUemDbi8HdXNrGDi9Cmckegp8yES55bNBRTrse1LS2VtuGu-ZXHRcco9z5YtHwk0R8r3ENN4k608cC-r2BNgMUd_EbqBCCbNwe0q0WxwvJ2aNocfJEnz0TVb3Tc8YhbOoAkiiM8LSMFd3G4QuJ0woc8F-vnpfAAhp_R5pLj-j7lYZHCFhvAXeU0IZ5o3Q1Wke9mnLajGsTl8g==" title="Inscription à la newsletter Gribouillis de vie" loading="lazy" scrolling="auto" allowfullscreen></iframe>
+  <form class="nl" id="nl" method="POST" action="https://f6365c12.sibforms.com/serve/MUIFAHUemDbi8HdXNrGDi9Cmckegp8yES55bNBRTrse1LS2VtuGu-ZXHRcco9z5YtHwk0R8r3ENN4k608cC-r2BNgMUd_EbqBCCbNwe0q0WxwvJ2aNocfJEnz0TVb3Tc8YhbOoAkiiM8LSMFd3G4QuJ0woc8F-vnpfAAhp_R5pLj-j7lYZHCFhvAXeU0IZ5o3Q1Wke9mnLajGsTl8g==" novalidate>
+    <p class="nl-t">Reçois ton énigme</p>
+    <p class="nl-s">et ton code <span class="pct">-15 %</span> sur toute la boutique</p>
+    <label class="nl-l" for="nl-mail">Ton adresse e-mail</label>
+    <input class="nl-i" id="nl-mail" type="email" name="EMAIL" required autocomplete="email" placeholder="prenom@exemple.fr">
+    <label class="nl-c"><input type="checkbox" name="OPT_IN" value="1" required> <span>J'accepte de recevoir l'énigme et la newsletter Gribouillis de vie. Je peux me désinscrire en un clic depuis chaque e-mail.</span></label>
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+    <input type="hidden" name="locale" value="fr"><input type="hidden" name="html_type" value="simple">
+    <button class="nl-b" type="submit">Je reçois mon énigme</button>
+    <p class="nl-e" id="nl-e" hidden></p>
+    <p class="nl-small">Pas de spam : une newsletter de temps en temps. Ton adresse n'est jamais revendue.</p>
+  </form>
+  <div class="nl nl-ok" id="nl-ok" hidden>
+    <p class="nl-t">Merci, détective !</p>
+    <p class="nl-s" style="margin-bottom:6px">Regarde ta boîte mail et clique sur le lien de confirmation pour recevoir ton énigme.</p>
+    <p class="nl-small">Rien reçu d'ici quelques minutes ? Pense à regarder dans les spams ou les promotions.</p>
   </div>
-  <p class="note">Ton adresse sert uniquement à t'envoyer l'énigme et la newsletter Gribouillis de vie. Elle n'est jamais revendue, et tu peux te désinscrire en un clic depuis chaque e-mail.</p>
+<script>
+(function(){
+  var f=document.getElementById('nl'), e=document.getElementById('nl-e');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault(); e.hidden=true;
+    var m=f.EMAIL.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){e.textContent="Vérifie ton adresse e-mail.";e.hidden=false;return;}
+    if(!f.OPT_IN.checked){e.textContent="Coche la case pour recevoir ton énigme.";e.hidden=false;return;}
+    var b=f.querySelector('button'); b.disabled=true; b.textContent='Envoi…';
+    fetch(f.action,{method:'POST',mode:'no-cors',body:new FormData(f)}).then(function(){
+      f.hidden=true; document.getElementById('nl-ok').hidden=false;
+    }).catch(function(){ b.disabled=false; b.textContent='Je reçois mon énigme'; e.textContent="Oups, ça n'a pas marché. Réessaie dans un instant.";e.hidden=false; });
+  });
+})();
+</script>
 </div></main>
 <footer>
   <div class="wrap">
