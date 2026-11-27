@@ -7,7 +7,7 @@
   css.textContent=
    '.gdv-bulle{position:fixed;right:18px;bottom:18px;z-index:50;max-width:300px;background:#fff;border-radius:18px;box-shadow:0 12px 34px rgba(60,40,30,.18);padding:18px 18px 16px;font-family:Quicksand,system-ui,sans-serif;color:#1c1c1c;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s}'+
    '.gdv-bulle.on{opacity:1;transform:none}'+
-   '.gdv-bulle:before{content:"";position:absolute;inset:6px;border:1.5px dashed #e9988c;border-radius:13px;pointer-events:none}'+
+   '.gdv-bulle:before{content:"";position:absolute;inset:6px;border:1.5px dashed #6e5240;border-radius:13px;pointer-events:none}'+
    '.gdv-bulle b{display:block;font-family:"Playwrite FR Trad",cursive;font-weight:300;font-size:1.02rem;line-height:1.7;margin:0 18px 4px 0}'+
    '.gdv-bulle p{margin:0 0 12px;font-size:.9rem;line-height:1.5;color:#5e5a56}'+
    '.gdv-bulle .pct{color:#c9726a;font-weight:600}'+
