@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /cadeau/
+Disallow: /merci-enigme.html
 Allow: /
 Disallow: /outils/
 
