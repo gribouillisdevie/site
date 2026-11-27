@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité | Gribouillis de vie</title>
+<style>
+@font-face{font-family:'Playwrite FR Trad';font-weight:200;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-200-normal.woff2) format('woff2')}
+@font-face{font-family:'Playwrite FR Trad';font-weight:300;font-display:swap;src:url(fonts/playwrite-fr-trad-latin-300-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:400;font-display:swap;src:url(fonts/quicksand-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:500;font-display:swap;src:url(fonts/quicksand-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Quicksand';font-weight:600;font-display:swap;src:url(fonts/quicksand-latin-600-normal.woff2) format('woff2')}
+  :root{--ink:#1c1c1c;--soft:#5e5a56;--line:#e9e4de;--rose:#e9988c;--beige:#cdb596}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#fff;color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;font-size:17px;line-height:1.7;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .hand{font-family:'Playwrite FR Trad',cursive;font-weight:300;letter-spacing:.2px;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(6px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:120px}
+  .logo-img{height:104px;width:auto;display:block}
+  @media(max-width:700px){.logo-img{height:72px}}
+  .logo{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.25rem;text-decoration:none;white-space:nowrap}
+  .links{display:flex;gap:28px;align-items:center;font-size:.92rem}
+  .links a{text-decoration:none;color:var(--soft)}
+  .links a:hover{color:var(--ink)}
+  .lang{display:flex;gap:2px;font-size:.8rem}
+  .lang button{border:0;background:none;cursor:pointer;font:500 .8rem 'Quicksand';color:#aaa;padding:4px 7px}
+  .lang button.on{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;font-size:.85rem;color:#8a857f}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+  footer .logo{font-size:1rem;color:var(--ink)}
+  footer .insta{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+  footer .insta:hover{color:var(--ink)}
+
+  main{padding:30px 0 70px}
+  .card{max-width:760px;margin:0 auto;text-align:center}
+  h1{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.9;margin-bottom:18px}
+  .lead{color:var(--soft);max-width:600px;margin:0 auto 30px}
+  .coupon{margin:34px auto;max-width:520px;background:#fcede8;border-radius:22px;padding:26px 20px;position:relative}
+  .coupon:before{content:'';position:absolute;inset:9px;border:2px dashed #6e5240;border-radius:16px;pointer-events:none}
+  .coupon .pct{font-size:3.4rem;font-weight:600;color:#cc6b6b;line-height:1}
+  .coupon .code{display:inline-block;margin:12px 0 8px;background:#fff;border-radius:10px;padding:8px 22px;font-size:1.6rem;font-weight:600;letter-spacing:1px;color:#6e5240}
+  .coupon small{display:block;color:var(--soft)}
+  .btn{display:inline-block;padding:13px 30px;border-radius:999px;text-decoration:none;background:#6e5240;color:#fff;font-weight:600;font-size:1rem}
+  .btn.light{background:#fff;color:var(--ink);border:1.3px solid var(--ink)}
+  .books{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:560px;margin:26px auto 0}
+  .books a{text-decoration:none;color:var(--ink);font-size:.95rem}
+  .books img{border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.08);margin-bottom:8px}
+  h2{font-family:'Playwrite FR Trad',cursive;font-weight:300;font-size:1.35rem;margin-top:50px;line-height:1.9}
+  @media(max-width:700px){.links a{display:none}}
+  .legal{max-width:760px;margin:0 auto}
+  .legal h1{text-align:center}
+  .legal h2{font-size:1.2rem;margin-top:34px}
+  .legal p,.legal li{color:var(--soft);margin-top:10px}
+  .legal ul{padding-left:22px}
+  .legal .maj{text-align:center;color:#8a857f;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><img src="img/logo.png?v=2" alt="gribouillis de vie" class="logo-img"></a>
+    <nav class="links">
+      <a href="index.html#creations" data-fr="mes créations" data-en="my creations">mes créations</a>
+      <a href="index.html#comment" data-fr="comment ça marche" data-en="how it works">comment ça marche</a>
+      <a href="index.html#moi" data-fr="qui suis-je" data-en="about me">qui suis-je</a>
+      <a href="index.html#faq" data-fr="questions" data-en="questions">questions</a>
+      
+    </nav>
+  </div>
+</header>
+<main><div class="wrap legal">
+  <h1>Politique de confidentialité</h1>
+  <p class="maj">Dernière mise à jour : 28 novembre 2026</p>
+
+  <h2>Qui s'occupe de tes données ?</h2>
+  <p>Le site gribouillisdevie.fr et la newsletter sont tenus par Gribouillis de vie. Pour toute question, tu peux écrire à <a href="mailto:contact@gribouillisdevie.fr">contact@gribouillisdevie.fr</a>.</p>
+
+  <h2>Quelles données je collecte ?</h2>
+  <p>Uniquement ton adresse e-mail, quand tu t'inscris à la newsletter (par exemple pour recevoir l'énigme offerte). Je ne demande ni ton nom, ni ton adresse, ni ton numéro de téléphone.</p>
+
+  <h2>Pourquoi ?</h2>
+  <ul>
+    <li>t'envoyer ce que tu as demandé (l'énigme offerte et le code de réduction) ;</li>
+    <li>t'envoyer de temps en temps des nouveautés, des idées et des offres de la boutique.</li>
+  </ul>
+  <p>Je le fais parce que tu as donné ton accord en cochant la case du formulaire. Tu peux retirer cet accord à tout moment.</p>
+
+  <h2>Qui y a accès ?</h2>
+  <p>Seulement moi. Les e-mails sont envoyés avec <a href="https://www.brevo.com/fr/legal/privacypolicy/" target="_blank" rel="noopener">Brevo</a>, un service français qui garde les données en Europe. Ton adresse n'est jamais vendue, louée ni partagée.</p>
+
+  <h2>Combien de temps ?</h2>
+  <p>Tant que tu es inscrit(e). Si tu te désinscris, ton adresse est retirée de la liste. Si tu n'ouvres plus aucun e-mail pendant 3 ans, ton adresse est supprimée.</p>
+
+  <h2>Te désinscrire</h2>
+  <p>Chaque e-mail contient un lien « se désinscrire » : un clic suffit. Tu peux aussi m'écrire à <a href="mailto:contact@gribouillisdevie.fr">contact@gribouillisdevie.fr</a>.</p>
+
+  <h2>Tes droits</h2>
+  <p>Tu peux demander à voir, corriger ou supprimer tes données, ou t'opposer à leur utilisation, en écrivant à <a href="mailto:contact@gribouillisdevie.fr">contact@gribouillisdevie.fr</a>. Je te réponds sous un mois. Si tu penses que tes droits ne sont pas respectés, tu peux t'adresser à la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+  <h2>Cookies</h2>
+  <p>Le site n'utilise aucun cookie publicitaire ni outil de suivi. Il retient seulement, le temps de ta visite, que tu as fermé la petite bulle de l'énigme offerte (pour ne pas te la remontrer).</p>
+
+  <h2>Achats</h2>
+  <p>Les achats se font sur Etsy. Pour les données liées à une commande, c'est la <a href="https://www.etsy.com/fr/legal/privacy/" target="_blank" rel="noopener">politique de confidentialité d'Etsy</a> qui s'applique.</p>
+</div>
+</main>
+<footer>
+  <div class="wrap">
+    <span class="logo">gribouillis de vie</span>
+    <span data-fr="Créations originales · France" data-en="Original designs · France">Créations originales · France</span>
+    <a class="insta" href="https://www.instagram.com/gribouillisdevie/" target="_blank" rel="noopener">Instagram · @gribouillisdevie</a>
+    <a class="insta" href="confidentialite.html" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a>
+  </div>
+</footer>
+</body>
+</html>
