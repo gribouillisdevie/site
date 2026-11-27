@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>relais</title>
+<p id="s">...</p>
+<script>
+(async()=>{const q=new URLSearchParams(location.search);const list=(q.get('f')||'').split(',').filter(Boolean);
+const out=[];for(const f of list){const r=await fetch(f);out.push({name:f.split('/').pop(),type:r.headers.get('content-type')||'image/jpeg',buf:await r.arrayBuffer()});}
+document.getElementById('s').textContent='ok '+out.length;
+if(window.opener){window.opener.postMessage({relais:out},'*');}})();
+</script>
