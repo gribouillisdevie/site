@@ -317,8 +317,8 @@
   </div>
 </footer>
 
-<script src="etsy-data.js?v=7"></script>
-<script src="catalog.js?v=6"></script>
+<script src="etsy-data.js?v=8"></script>
+<script src="catalog.js?v=7"></script>
 <script>
   let curCat='all',curSub=null;
   function renderCatalog(){
@@ -329,7 +329,7 @@
     const list=P.filter(p=>(curCat==='all'||p.cat===curCat)&&(!curSub||p.sub===curSub));
     document.getElementById('catalog').innerHTML=list.map(p=>{
       const c=CATS.find(x=>x.id===p.cat), s=c.subs&&c.subs.find(x=>x.id===p.sub);
-      const lettre=p.cat==='lettres', d=window.ETSY&&ETSY[p.papier];
+      const lettre=p.cat==='lettres', d=window.ETSY&&ETSY[(en&&p.pen)?p.pen:p.papier];
       const ph=d?`<div class="ph"><img src="${etsyImg(d[1][0],'570xN')}" alt="${t(p)}" loading="lazy"></div>`:`<div class="ph art"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div>`;
       return `<a class="prod in" href="${p.slug}.html">${ph}
         <p class="tag">${t(c)}${s?' · '+t(s):''}</p><h3>${t(p)}</h3><p>${en?p.den:p.dfr}</p>

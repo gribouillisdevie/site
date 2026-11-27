@@ -178,7 +178,7 @@
   .thumbs button.on{border-color:var(--ink)}
   .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
   .main{position:relative;background:#f3ede6;border-radius:8px;overflow:hidden;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center}
-  .main img{width:100%;height:100%;object-fit:contain;display:block}
+  .main img,.main video{width:100%;height:100%;object-fit:contain;display:block}#mw{width:100%;height:100%}.thumbs video{width:100%;height:100%;object-fit:cover;display:block}.thumbs button{position:relative}.thumbs .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;text-shadow:0 1px 4px rgba(0,0,0,.5)}
   .main .nav-b{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.88);cursor:pointer;font-size:1.2rem;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
   .main .prev{left:12px}.main .next{right:12px}
   .main .count{position:absolute;bottom:12px;right:14px;background:rgba(255,255,255,.88);border-radius:999px;font-size:.78rem;padding:3px 10px;color:var(--soft)}
@@ -234,8 +234,8 @@
   </div>
 </footer>
 
-<script src="etsy-data.js?v=7"></script>
-<script src="catalog.js?v=6"></script>
+<script src="etsy-data.js?v=8"></script>
+<script src="catalog.js?v=7"></script>
 <script>
   const slug='lettres-couple';
   const p=P.find(x=>x.slug===slug)||P[0];
@@ -259,7 +259,7 @@
       what:'what you get',how:'how it works',
       papierL:['A personalised poster printed on thick paper, A3 (A4 on request)','The name of your choice, or no name','In French or in English','Free delivery in France, prepared within 3 to 5 days','Poster only: no frame or stamp'],
       pdfL:['A personalised high-quality PDF file','The name of your choice, or no name','In French or in English','Print it at home or at a print shop, A3 or A4','Nothing is shipped'],
-      livreL:['An A4 PDF book, in French','Solutions and a detective diploma','Print it at home as many times as you like','Available right after purchase','Nothing is shipped'],
+      livreL:['An A4 PDF book, in English','Solutions and a detective diploma','Print it at home as many times as you like','Available right after purchase','Nothing is shipped'],
       howLiv:['Order on Etsy, the PDF arrives straight away','Print the pages, in colour or black and white','Look at the suspects, read the clues… and find the culprit!'],livre:'PDF book to print',
       howL:['Choose the format and the language','Enter the name when you order','Write down the date of each moment as your story unfolds'],
       lpL:['The letters printed double-sided, with envelopes to cut out and fold','Free delivery in France'],
@@ -274,13 +274,13 @@
     const lettre=p.cat==='lettres';
     const F=p.livre?[['papier',t.livre,p.prix]]:lettre?[['papier',t.lp,p.pp],['pdf',t.pdf,p.pd],['en_',t.en_,p.pd]]:[['papier',t.papier,'24,00'],['pdf',t.pdf,'10,00']];
     if(!F.find(f=>f[0]===fmt)) fmt='papier';
-    const id=p[fmt], d=window.ETSY&&ETSY[id];
+    const id=(en&&p.pen)?p.pen:p[fmt], d=window.ETSY&&ETSY[id];
     const imgs=d?d[1]:[];
     if(idx>=imgs.length) idx=0;
     const lead=(ETSY[p.papier]&&ETSY[p.papier][0]&&!en)?ETSY[p.papier][0]:(en?p.den:p.dfr);
     document.title=tt(p)+' · Gribouillis de vie';
-    const gal=imgs.length?`<div class="gal"><div class="thumbs">${imgs.map((m,i)=>`<button data-i="${i}" class="${i===idx?'on':''}"><img src="${etsyImg(m,'340x270')}" alt="" loading="lazy"></button>`).join('')}</div>
-      <div class="main"><img id="mi" src="${etsyImg(imgs[idx],'794xN')}" alt="${tt(p)}">
+    const gal=imgs.length?`<div class="gal"><div class="thumbs">${imgs.map((m,i)=>`<button data-i="${i}" class="${i===idx?'on':''}">${/\.mp4$/.test(m)?`<video src="${m}#t=1" muted playsinline preload="metadata"></video><span class="play">▶</span>`:`<img src="${etsyImg(m,'340x270')}" alt="" loading="lazy">`}</button>`).join('')}</div>
+      <div class="main"><div id="mw">${media(imgs[idx],tt(p))}</div>
       <button class="nav-b prev" aria-label="précédente">‹</button><button class="nav-b next" aria-label="suivante">›</button><span class="count">${idx+1} / ${imgs.length}</span></div></div>`
       :`<div class="main art prod"><div class="ph art" style="width:100%;height:100%"><div class="wash w-${p.w}"></div><img src="img/${p.ic}.png" alt=""></div></div>`;
     const list=p.livre?t.livreL:lettre?(fmt==='papier'?t.lpL:fmt==='pdf'?t.ldL:t.leL):(fmt==='papier'?t.papierL:t.pdfL);
@@ -294,7 +294,8 @@
       <div class="det"><h2>${t.what}</h2><ul>${list.map(x=>`<li>${x}</li>`).join('')}</ul>
       <h2>${t.how}</h2><ul>${how.map(x=>`<li>${x}</li>`).join('')}</ul>${(lettre||p.livre)?'':`<p style="margin-top:18px;font-size:.85rem">${t.lt}</p>`}</div></div>`;
   }
-  function show(i){const d=ETSY[p[fmt]];if(!d)return;const n=d[1].length;idx=(i+n)%n;document.getElementById('mi').src=etsyImg(d[1][idx],'794xN');
+  function media(m,a){return /\.mp4$/.test(m)?`<video src="${m}" autoplay muted loop playsinline controls></video>`:`<img id="mi" src="${etsyImg(m,'794xN')}" alt="${a||''}">`}
+  function show(i){const en=document.documentElement.lang==='en';const d=ETSY[(en&&p.pen)?p.pen:p[fmt]];if(!d)return;const n=d[1].length;idx=(i+n)%n;document.getElementById('mw').innerHTML=media(d[1][idx]);
     document.querySelectorAll('.thumbs button').forEach((b,k)=>b.classList.toggle('on',k===idx));document.querySelector('.count').textContent=(idx+1)+' / '+n;
     const tb=document.querySelectorAll('.thumbs button')[idx];tb&&tb.scrollIntoView({block:'nearest',inline:'nearest'});}
   document.getElementById('pg').addEventListener('click',e=>{
